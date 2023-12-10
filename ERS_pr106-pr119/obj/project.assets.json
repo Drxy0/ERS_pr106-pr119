@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\drljo\\.nuget\\packages\\": {}
+    "C:\\Users\\skail\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\drljo\\source\\repos\\ERS_pr106-pr119\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj",
+      "projectUniqueName": "C:\\Users\\skail\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj",
       "projectName": "ERS_pr106-pr119",
-      "projectPath": "C:\\Users\\drljo\\source\\repos\\ERS_pr106-pr119\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj",
-      "packagesPath": "C:\\Users\\drljo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\drljo\\source\\repos\\ERS_pr106-pr119\\ERS_pr106-pr119\\obj\\",
+      "projectPath": "C:\\Users\\skail\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj",
+      "packagesPath": "C:\\Users\\skail\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\skail\\Desktop\\Projekat\\ERS_pr106-pr119\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\drljo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\skail\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -56,12 +56,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "frameworkReferences": {
-          "Microsoft.NETCore.App": {
-            "privateAssets": "all"
-          }
-        },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }
