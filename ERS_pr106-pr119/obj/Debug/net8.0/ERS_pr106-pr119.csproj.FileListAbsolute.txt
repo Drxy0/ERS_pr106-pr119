@@ -1,0 +1,15 @@
+C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119\bin\Debug\net8.0\ERS_pr106-pr119.exe
+C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119\bin\Debug\net8.0\ERS_pr106-pr119.deps.json
+C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119\bin\Debug\net8.0\ERS_pr106-pr119.runtimeconfig.json
+C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119\bin\Debug\net8.0\ERS_pr106-pr119.dll
+C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119\bin\Debug\net8.0\ERS_pr106-pr119.pdb
+C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119\obj\Debug\net8.0\ERS_pr106-pr119.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119\obj\Debug\net8.0\ERS_pr106-pr119.AssemblyInfoInputs.cache
+C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119\obj\Debug\net8.0\ERS_pr106-pr119.AssemblyInfo.cs
+C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119\obj\Debug\net8.0\ERS_pr106-pr119.csproj.CoreCompileInputs.cache
+C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119\obj\Debug\net8.0\ERS_pr106-pr119.sourcelink.json
+C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119\obj\Debug\net8.0\ERS_pr106-pr119.dll
+C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119\obj\Debug\net8.0\refint\ERS_pr106-pr119.dll
+C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119\obj\Debug\net8.0\ERS_pr106-pr119.pdb
+C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119\obj\Debug\net8.0\ERS_pr106-pr119.genruntimeconfig.cache
+C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119\obj\Debug\net8.0\ref\ERS_pr106-pr119.dll
