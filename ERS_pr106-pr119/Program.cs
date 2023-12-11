@@ -2,7 +2,7 @@
 {
 	internal class Program
 	{
-		static void Main(string[] args)
+		static void Main()
 		{
 			string UI = "\nEvidencija potrošnje električne energije\n\n";
 			UI += "1 - Importuj fajlove\n";
