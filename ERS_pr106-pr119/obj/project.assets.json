@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\drljo\\Desktop\\ERS_pr106-pr119\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj",
+      "projectUniqueName": "C:\\Users\\drljo\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj",
       "projectName": "ERS_pr106-pr119",
-      "projectPath": "C:\\Users\\drljo\\Desktop\\ERS_pr106-pr119\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj",
+      "projectPath": "C:\\Users\\drljo\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj",
       "packagesPath": "C:\\Users\\drljo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\drljo\\Desktop\\ERS_pr106-pr119\\ERS_pr106-pr119\\obj\\",
+      "outputPath": "C:\\Users\\drljo\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\drljo\\AppData\\Roaming\\NuGet\\NuGet.Config",
