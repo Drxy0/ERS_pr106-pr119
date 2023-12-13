@@ -12,10 +12,10 @@ namespace ERS_pr106_pr119
 
 		public void Show()
 		{
-			string UIstring = "\nEvidencija potrošnje električne energije\n\n";
-			UIstring += "1 - Importuj fajlove\n";
-			UIstring += "2 - Ispisati prognoziranu i ostvarenu potrošnju\n";
-			UIstring += "q - Quit program\n";
+			string UIstring = "\nEvidencija potrošnje električne energije\n\n" +
+								"1 - Importuj fajlove\n" +
+								"2 - Ispisati prognoziranu i ostvarenu potrošnju\n" +
+								"q - Quit program\n";
 			Console.WriteLine(UIstring);
 		}
 
