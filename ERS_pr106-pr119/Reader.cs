@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using Microsoft.VisualBasic.FileIO;
 
 namespace ERS_pr106_pr119
 {
@@ -34,19 +35,18 @@ namespace ERS_pr106_pr119
 
 			foreach (string file in files)
 			{
+				string fileName = Path.GetFileName(file);
+				string[] extension = fileName.Split('.');
+				string[] nameComponents = extension[0].Split('_');
+				string tip = nameComponents[0];
+				string godina = nameComponents[1];
+				string mjesec = nameComponents[2];
+				string dan = nameComponents[3];
+
 				if (Path.GetExtension(file) == ".xml")
 				{
 					xmlDoc.Load(file);
-					string fileName = Path.GetFileName(file);
-					string[] extension = fileName.Split('.');
-					string[] nameComponents = extension[0].Split('_');
-					string tip = nameComponents[0];
-					string godina = nameComponents[1];
-					string mjesec = nameComponents[2];
-					string dan = nameComponents[3];
 
-					for(int i = 0; i < nameComponents.Length; i++)
-						Console.WriteLine(nameComponents[i]);
 					foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
 					{
 						XmlNodeList child = node.ChildNodes;
@@ -58,10 +58,28 @@ namespace ERS_pr106_pr119
 						list.Add(element);
 					}
 				}
+				else if (Path.GetExtension(file) == ".csv")
+				{
+					using(TextFieldParser parser = new TextFieldParser(file))
+					{
+						parser.TextFieldType = FieldType.Delimited;
+						parser.SetDelimiters(",");
+						string[] headers = parser.ReadFields();
+						while(!parser.EndOfData)
+						{
+							string[] fields = parser.ReadFields();
+
+							string sat = fields[0];
+							string load = fields[1];
+							string oblast = fields[2];
+							Element element = new Element(sat, load, oblast);
+							list.Add(element);
+						}
+						Console.WriteLine(list.Count);
+					}
+				}
 			}
 
-			foreach(var element in  list)
-				Console.WriteLine(element.sat.ToString());
 		}
 	}
 }
