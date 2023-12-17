@@ -25,8 +25,8 @@ namespace ERS_pr106_pr119
 		}
 		public void Ucitaj()
 		{
-			XmlDocument xmlDoc = new XmlDocument();
 			List<Element> list = new List<Element>();
+
 			string workingDirectory = Environment.CurrentDirectory;
 			string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
 			string filesDirectory = projectDirectory + "\\xml";
@@ -36,50 +36,67 @@ namespace ERS_pr106_pr119
 			foreach (string file in files)
 			{
 				string fileName = Path.GetFileName(file);
+
 				string[] extension = fileName.Split('.');
 				string[] nameComponents = extension[0].Split('_');
+
 				string tip = nameComponents[0];
 				string godina = nameComponents[1];
 				string mjesec = nameComponents[2];
 				string dan = nameComponents[3];
 
-				if (Path.GetExtension(file) == ".xml")
+				string fileExtension = Path.GetExtension(file);
+
+				if (fileExtension == ".xml")
 				{
-					xmlDoc.Load(file);
-
-					foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
-					{
-						XmlNodeList child = node.ChildNodes;
-						string sat = child.Item(0).InnerText;
-						string load = child.Item(1).InnerText;
-						string oblast = child.Item(2).InnerText;
-
-						Element element = new Element(sat, load, oblast);
-						list.Add(element);
-					}
+					ProcessXML(ref list, file);
 				}
-				else if (Path.GetExtension(file) == ".csv")
+				else if (fileExtension == ".csv")
 				{
-					using(TextFieldParser parser = new TextFieldParser(file))
-					{
-						parser.TextFieldType = FieldType.Delimited;
-						parser.SetDelimiters(",");
-						string[] headers = parser.ReadFields();
-						while(!parser.EndOfData)
-						{
-							string[] fields = parser.ReadFields();
-
-							string sat = fields[0];
-							string load = fields[1];
-							string oblast = fields[2];
-							Element element = new Element(sat, load, oblast);
-							list.Add(element);
-						}
-						Console.WriteLine(list.Count);
-					}
+					ProcessCSV(ref list, file);
 				}
 			}
+		}
 
+		private void ProcessXML(ref List<Element> list, string file)
+		{
+			XmlDocument xmlDoc = new XmlDocument();
+			xmlDoc.Load(file);
+
+			foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
+			{
+				XmlNodeList child = node.ChildNodes;
+
+				string sat = child.Item(0).InnerText;
+				string load = child.Item(1).InnerText;
+				string oblast = child.Item(2).InnerText;
+
+				Element element = new Element(sat, load, oblast);
+				list.Add(element);
+			}
+		}
+
+		private void ProcessCSV(ref List<Element> list, string file)
+		{
+			using (TextFieldParser parser = new TextFieldParser(file))
+			{
+				parser.TextFieldType = FieldType.Delimited;
+				parser.SetDelimiters(",");
+
+				string[] headers = parser.ReadFields();
+
+				while (!parser.EndOfData)
+				{
+					string[] fields = parser.ReadFields();
+
+					string sat = fields[0];
+					string load = fields[1];
+					string oblast = fields[2];
+
+					Element element = new Element(sat, load, oblast);
+					list.Add(element);
+				}
+			}
 		}
 	}
 }
