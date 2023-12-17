@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\drljo\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj": {}
+    "C:\\Users\\skail\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj": {}
   },
   "projects": {
-    "C:\\Users\\drljo\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj": {
+    "C:\\Users\\skail\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\drljo\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj",
+        "projectUniqueName": "C:\\Users\\skail\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj",
         "projectName": "ERS_pr106-pr119",
-        "projectPath": "C:\\Users\\drljo\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj",
-        "packagesPath": "C:\\Users\\drljo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\drljo\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119\\obj\\",
+        "projectPath": "C:\\Users\\skail\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj",
+        "packagesPath": "C:\\Users\\skail\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\skail\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\drljo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\skail\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,6 +39,20 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Oracle.ManagedDataAccess": {
+              "target": "Package",
+              "version": "[21.12.0, )"
+            },
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "System.Security.Permissions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

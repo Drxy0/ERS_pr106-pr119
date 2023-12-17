@@ -7,6 +7,7 @@ namespace ERS_pr106_pr119
 	{
 		static void Main()
 		{
+			
 			UI ui = new UI();
 			string? s;
 			do {
@@ -21,8 +22,10 @@ namespace ERS_pr106_pr119
 				}
 			}
 			while (s != "q");
+			
+        SUBP.TablesSetup.TableCreations();
 
-		}
+        }
 
 		static void Ucitaj()
 		{
@@ -38,5 +41,8 @@ namespace ERS_pr106_pr119
 			xml.Load(projectDirectory2);
 
 		}
+
+		
+
 	}
 }
