@@ -8,6 +8,7 @@ namespace ERS_pr106_pr119
 		static void Main()
 		{
 			UI ui = new UI();
+			Reader reader = new Reader();
 			string? s;
 			do {
 				ui.Show();
@@ -16,7 +17,7 @@ namespace ERS_pr106_pr119
 				switch (s)
 				{
 					case "1":
-						Ucitaj();
+						reader.Ucitaj();
 						break;
 				}
 			}
@@ -24,19 +25,5 @@ namespace ERS_pr106_pr119
 
 		}
 
-		static void Ucitaj()
-		{
-			XmlDocument xml = new XmlDocument();
-
-			string workingDirectory = Environment.CurrentDirectory;
-
-			string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-
-			string projectDirectory2 = projectDirectory + "\\xml\\ostv_2020_05_07.xml";
-
-			Console.WriteLine(projectDirectory2);
-			xml.Load(projectDirectory2);
-
-		}
 	}
 }
