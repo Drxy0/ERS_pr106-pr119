@@ -7,6 +7,7 @@ namespace ERS_pr106_pr119
 	{
 		static void Main()
 		{
+			
 			UI ui = new UI();
 			Reader reader = new Reader();
 			string? s;
@@ -22,8 +23,9 @@ namespace ERS_pr106_pr119
 				}
 			}
 			while (s != "q");
+			
+        SUBP.TablesSetup.TableCreations();
 
-		}
-
+        }
 	}
 }
