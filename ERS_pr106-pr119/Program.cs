@@ -9,7 +9,7 @@ namespace ERS_pr106_pr119
 		{
 			
 			UI ui = new UI();
-			Reader reader = new Reader();
+			FileReader reader = new FileReader();
 			string? s;
 			do {
 				ui.Show();
@@ -25,7 +25,6 @@ namespace ERS_pr106_pr119
 			while (s != "q");
 			
         SUBP.TablesSetup.TableCreations();
-
         }
 	}
 }

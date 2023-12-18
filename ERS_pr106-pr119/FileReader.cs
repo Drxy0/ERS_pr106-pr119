@@ -8,21 +8,8 @@ using Microsoft.VisualBasic.FileIO;
 
 namespace ERS_pr106_pr119
 {
-	internal class Reader
+	public class FileReader
 	{
-		public struct Element
-		{
-			public string sat;
-			public string load;
-			public string oblast;
-
-			public Element(string sat, string load, string oblast)
-			{
-				this.sat = sat;
-				this.load = load;
-				this.oblast = oblast;
-			}
-		}
 		public void Ucitaj()
 		{
 			List<Element> list = new List<Element>();
@@ -71,7 +58,7 @@ namespace ERS_pr106_pr119
 				string load = child.Item(1).InnerText;
 				string oblast = child.Item(2).InnerText;
 
-				Element element = new Element(sat, load, oblast);
+				Element element = new Element(sat, load, oblast, null);
 				list.Add(element);
 			}
 		}
@@ -93,7 +80,7 @@ namespace ERS_pr106_pr119
 					string load = fields[1];
 					string oblast = fields[2];
 
-					Element element = new Element(sat, load, oblast);
+					Element element = new Element(sat, load, oblast, null);
 					list.Add(element);
 				}
 			}
