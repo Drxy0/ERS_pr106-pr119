@@ -4,21 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
-using Microsoft.VisualBasic.FileIO;
 
-namespace ERS_pr106_pr119
+namespace ERS_pr106_pr119.FileReader
 {
-	public class FileReader
+	internal class ReaderXML : FileReader
 	{
 		public void Ucitaj()
 		{
 			List<Element> list = new List<Element>();
-
-			string workingDirectory = Environment.CurrentDirectory;
-			string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-			string filesDirectory = projectDirectory + "\\xml";
-
-			string[] files = Directory.GetFiles(filesDirectory);
+			string[] files = new FilesDirectory().GetFiles();
 
 			foreach (string file in files)
 			{
@@ -38,10 +32,6 @@ namespace ERS_pr106_pr119
 				{
 					ProcessXML(ref list, file);
 				}
-				else if (fileExtension == ".csv")
-				{
-					ProcessCSV(ref list, file);
-				}
 			}
 		}
 
@@ -60,29 +50,6 @@ namespace ERS_pr106_pr119
 
 				Element element = new Element(sat, load, oblast, null);
 				list.Add(element);
-			}
-		}
-
-		private void ProcessCSV(ref List<Element> list, string file)
-		{
-			using (TextFieldParser parser = new TextFieldParser(file))
-			{
-				parser.TextFieldType = FieldType.Delimited;
-				parser.SetDelimiters(",");
-
-				string[] headers = parser.ReadFields();
-
-				while (!parser.EndOfData)
-				{
-					string[] fields = parser.ReadFields();
-
-					string sat = fields[0];
-					string load = fields[1];
-					string oblast = fields[2];
-
-					Element element = new Element(sat, load, oblast, null);
-					list.Add(element);
-				}
 			}
 		}
 	}

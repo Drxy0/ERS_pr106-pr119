@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using ERS_pr106_pr119.FileReader;
+using System.IO;
 using System.Xml;
 
 namespace ERS_pr106_pr119
@@ -9,7 +10,7 @@ namespace ERS_pr106_pr119
 		{
 			
 			UI ui = new UI();
-			FileReader reader = new FileReader();
+			ReaderXML xmlReader = new ReaderXML();
 			string? s;
 			do {
 				ui.Show();
@@ -18,7 +19,7 @@ namespace ERS_pr106_pr119
 				switch (s)
 				{
 					case "1":
-						reader.Ucitaj();
+						xmlReader.Ucitaj();
 						break;
 				}
 			}
