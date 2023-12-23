@@ -19,5 +19,32 @@ namespace ERS_pr106_pr119
 			Console.WriteLine(UIstring);
 		}
 
+		public void IspisOpcije(List<FileDTO> fileDTOs)
+		{
+			Console.Write("Izaberite datum: ");
+			string datum = Console.ReadLine();
+			Console.Write("Izaberite geografsku oblast: ");
+			string geoOblast = Console.ReadLine();
+
+			foreach(FileDTO fileDTO in fileDTOs)
+			{
+				if (datum == fileDTO.Datum.GetDatum())
+				{
+
+					foreach (Element el in fileDTO.Elements)
+					{
+						Console.WriteLine(el.Oblast);
+						if (el.Oblast == geoOblast)
+						{
+
+						}
+					}
+				}
+
+			}
+
+
+		}
+
 	}
 }

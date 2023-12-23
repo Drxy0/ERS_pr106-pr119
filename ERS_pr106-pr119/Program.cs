@@ -11,6 +11,7 @@ namespace ERS_pr106_pr119
 			
 			UI ui = new UI();
 			ReaderXML xmlReader = new ReaderXML();
+			List<FileDTO> files = new List<FileDTO>();
 			string? s;
 			do {
 				ui.Show();
@@ -19,7 +20,10 @@ namespace ERS_pr106_pr119
 				switch (s)
 				{
 					case "1":
-						xmlReader.Ucitaj();
+						files = xmlReader.Ucitaj();
+						break;
+					case "2":
+						ui.IspisOpcije(files);
 						break;
 				}
 			}
