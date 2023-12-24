@@ -29,7 +29,7 @@ namespace ERS_pr106_pr119.FileReader
 				FileDTO fileDTO = new FileDTO();
 
 				fileDTO.Datum = new Datum(dan, mjesec, godina);
-				
+
 				string fileExtension = Path.GetExtension(file);
 
 				if (fileExtension == ".xml")
@@ -37,9 +37,8 @@ namespace ERS_pr106_pr119.FileReader
 					List<Element> list = new List<Element>();
 					ProcessXML(ref list, file, tip);
 					fileDTO.Elements = list;
+					fileDTOs.Add(fileDTO);
 				}
-
-				fileDTOs.Add(fileDTO);
 			}
 			return fileDTOs;
 		}
