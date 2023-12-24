@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERS_pr106_pr119.SUBP.RowManagement
 {
-    internal interface progManagement
-    {
+    public interface progManagement : TableManagement<Element>
+    { 
     }
 }

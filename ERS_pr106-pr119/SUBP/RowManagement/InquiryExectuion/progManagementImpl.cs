@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 {
-    internal class progManagementImpl
+    public class progManagementImpl : progManagement
     {
+        public void InsertRows(List<Element> listaCeleTabele)
+        {
+
+
+        }
     }
 }

@@ -16,8 +16,8 @@ namespace ERS_pr106_pr119.SUBP
         public static void TableCreations()
         {
 
-            string sql1 = "create table prog_potrosnja(sat int, load int, oblast varchar(4),ime varchar(5)),PRIMARY KEY (sat,ime)";
-            string sql2 = "create table ostv_potrosnja(sat int, load int, oblast varchar(4),ime varchar(5)),time TIMESTAMP,file_location varchar(255),PRIMARY KEY (sat,ime),";
+            string sql1 = "create table prog_potrosnja(sat_p int, load_p int, oblast_p varchar(4),ime_p varchar(5)),time_p TIMESTAMP,file_location_p varchar(255),PRIMARY KEY (sat_p,ime_p))";
+            string sql2 = "create table ostv_potrosnja(sat_o int, load_o int, oblast_o varchar(4),ime_o varchar(5)),time_o TIMESTAMP,file_location_o varchar(255),PRIMARY KEY (sat_o,ime_o))";
 
             CreateTable(sql1);
             CreateTable(sql2);
@@ -26,26 +26,26 @@ namespace ERS_pr106_pr119.SUBP
 
         private static int ExecuteNonQuery(string sql)
         {
-            using (IDbConnection connection = ConnectionSetup.GetConnection())
+            try
             {
-                try
+
+                using (IDbConnection connection = ConnectionSetup.GetConnection())
                 {
-                   
                     connection.Open();
 
                     using (IDbCommand command = connection.CreateCommand())
                     {
                         command.CommandText = sql;
                         int rowsAffected = command.ExecuteNonQuery();
-                    
+
                         return rowsAffected;
                     }
                 }
-                catch (DbException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return -2;
-                }
+            }
+            catch (DbException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return -2;
             }
         }
 

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERS_pr106_pr119.SUBP.RowManagement
+namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 {
-    public interface ostvManagement : TableManagement<Element>
+    internal class ParameterManagement
     {
     }
 }

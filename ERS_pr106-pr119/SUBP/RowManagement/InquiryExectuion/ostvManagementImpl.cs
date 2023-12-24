@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 {
-    internal class ostvManagementImpl
+    public class ostvManagementImpl : ostvManagement
     {
+        public void InsertRows(List<Element> listaCeleTabele) { 
+        
+        
+        }
     }
 }

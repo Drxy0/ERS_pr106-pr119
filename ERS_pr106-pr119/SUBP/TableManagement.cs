@@ -8,6 +8,7 @@ namespace ERS_pr106_pr119.SUBP
 {
     public interface TableManagement<T>
     {
+        void InsertRows(List<T> listaCeleTabele);
 
     }
 }
