@@ -13,17 +13,17 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 
         public bool ExistsById(int sat,string tip, long vreme, IDbConnection connection)
         {
-            string query = "select * from showing where ordnum_sh=:ordnum_sh";
+            string query = "select * from ostv_potrosnja where sat_o=:sat_o,tip_o=:tip_o,vreme_o=:vreme_o";
 
             using (IDbCommand command = connection.CreateCommand())
             {
                 command.CommandText = query;
                 ParameterManagement.AddParameter(command, "sat_o", DbType.Int32);
-                ParameterManagement.AddParameter(command, "tip_p", DbType.String);
-                ParameterManagement.AddParameter(command, "vreme_p", DbType.Int64);
+                ParameterManagement.AddParameter(command, "tip_o", DbType.String);
+                ParameterManagement.AddParameter(command, "vreme_o", DbType.Int64);
                 ParameterManagement.SetParameterValue(command, "sat_o", sat);
-                ParameterManagement.SetParameterValue(command, "tip_p", tip);
-                ParameterManagement.SetParameterValue(command, "vreme_p", vreme);
+                ParameterManagement.SetParameterValue(command, "tip_o", tip);
+                ParameterManagement.SetParameterValue(command, "vreme_o", vreme);
                 return command.ExecuteScalar() != null;
             }
         }
@@ -32,7 +32,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
         public int SaveRow(Element entity, IDbConnection connection) {
 
             string insertSql = "insert into prog_potrosnja(sat_o, load_o, oblast_o, tip_p, vreme_p ,file_location_o) values (:sat_o, :load_o, :oblast_o, :tip_p, :file_location_o)";
-            string updateSql = "update prog_potrosnja set sat_o=:sat_o, load_o = :load_o, oblast_o = :oblast_o, tip_p = :tip_p,vreme_p = : vreme_p, file_location_o = :file_location_o ";
+            string updateSql = "update prog_potrosnja set sat_o=:sat_o, load_o = :load_o, oblast_o = :oblast_o, tip_o = :tip_o,vreme_o = : vreme_o, file_location_o = :file_location_o ";
 
             using (IDbCommand command = connection.CreateCommand())
             {
@@ -40,15 +40,15 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
                 ParameterManagement.AddParameter(command, "sat_o", DbType.Int32);
                 ParameterManagement.AddParameter(command, "load_o", DbType.Int32);
                 ParameterManagement.AddParameter(command, "oblast_o", DbType.String);
-                ParameterManagement.AddParameter(command, "tip_p", DbType.String);
-                ParameterManagement.AddParameter(command, "vreme_p", DbType.Int64);
+                ParameterManagement.AddParameter(command, "tip_o", DbType.String);
+                ParameterManagement.AddParameter(command, "vreme_o", DbType.Int64);
                 ParameterManagement.AddParameter(command, "file_location_o", DbType.String);
 
                 ParameterManagement.SetParameterValue(command, "sat_o", entity.Sat);
                 ParameterManagement.SetParameterValue(command, "load_o", entity.Load);
                 ParameterManagement.SetParameterValue(command, "oblast_o", entity.Oblast);
-                ParameterManagement.SetParameterValue(command, "tip_p", entity.Tip);
-                ParameterManagement.SetParameterValue(command, "vreme_p", entity.Vreme);
+                ParameterManagement.SetParameterValue(command, "tip_o", entity.Tip);
+                ParameterManagement.SetParameterValue(command, "vreme_o", entity.Vreme);
                 ParameterManagement.SetParameterValue(command, "file_location_o", entity.File);
                 return command.ExecuteNonQuery();
             }

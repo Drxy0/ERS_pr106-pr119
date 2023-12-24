@@ -12,7 +12,7 @@ namespace ERS_pr106_pr119.SUBP
 {
     public class ConnectionSetup: IDisposable
     {
-        private static IDbConnection? connection = null;
+        private static IDbConnection connection = null;
 
         public static IDbConnection GetConnection()
         {
