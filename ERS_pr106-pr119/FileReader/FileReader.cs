@@ -8,6 +8,6 @@ namespace ERS_pr106_pr119.FileReader
 {
 	internal interface FileReader
 	{
-		public void Ucitaj();
+		public List<FileDTO> Ucitaj();
 	}
 }

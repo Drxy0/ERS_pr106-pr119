@@ -9,9 +9,9 @@ namespace ERS_pr106_pr119.FileReader
 {
 	internal class ReaderXML : FileReader
 	{
-		public void Ucitaj()
+		public List<FileDTO> Ucitaj()
 		{
-			List<Element> list = new List<Element>();
+			List<FileDTO> fileDTOs = new();
 			string[] files = new FilesDirectory().GetFiles();
 
 			foreach (string file in files)
@@ -26,16 +26,24 @@ namespace ERS_pr106_pr119.FileReader
 				string mjesec = nameComponents[2];
 				string dan = nameComponents[3];
 
+				FileDTO fileDTO = new FileDTO();
+
+				fileDTO.Datum = new Datum(dan, mjesec, godina);
+
 				string fileExtension = Path.GetExtension(file);
 
 				if (fileExtension == ".xml")
 				{
-					ProcessXML(ref list, file);
+					List<Element> list = new List<Element>();
+					ProcessXML(ref list, file, tip);
+					fileDTO.Elements = list;
+					fileDTOs.Add(fileDTO);
 				}
 			}
+			return fileDTOs;
 		}
 
-		private void ProcessXML(ref List<Element> list, string file)
+		private void ProcessXML(ref List<Element> list, string file, string tip)
 		{
 			XmlDocument xmlDoc = new XmlDocument();
 			xmlDoc.Load(file);
@@ -48,7 +56,7 @@ namespace ERS_pr106_pr119.FileReader
 				string load = child.Item(1).InnerText;
 				string oblast = child.Item(2).InnerText;
 
-				Element element = new Element(sat, load, oblast, null);
+				Element element = new Element(sat, load, oblast, tip);
 				list.Add(element);
 			}
 		}
