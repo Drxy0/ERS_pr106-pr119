@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic.FileIO;
+﻿using ERS_pr106_pr119.DTO;
+using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Xml;
 
 namespace ERS_pr106_pr119.FileReader
 {
-	internal class ReaderCSV : FileReader
+    internal class ReaderCSV : FileReader
 	{
 		public List<FileDTO> Ucitaj()
 		{

@@ -16,7 +16,6 @@ namespace ERS_pr106_pr119
 			this.dan = dan;
 			this.mjesec = mjesec;
 			this.godina = godina;
-
 		}
 		public Datum()
 		{
@@ -43,6 +42,12 @@ namespace ERS_pr106_pr119
 		{
 			string datum = this.Dan + "." + this.Mjesec + "." + this.Godina + ".";
 			return datum;
+		}
+
+		public Datum SetDatumFromString(string datum)
+		{
+			string[] dijelovi = datum.Split('.');
+			return new Datum(dijelovi[0], dijelovi[1], dijelovi[2]);
 		}
 	}
 }
