@@ -8,20 +8,31 @@ namespace ERS_pr106_pr119
 {
     public class Element
     {
-            private string sat;
+            private int sat;
             private string load;
             private string oblast;
             private string tip;
+            private long vreme;           //TREBA SA NJOM DA VIDIMO DAL TREBA SAMO VREME OD POKRETANJA PROGRAMA ILI I DATUM   
+            private string file_location;
 
-            public Element(string sat, string load, string oblast,string tip)
+            public Element(string sat, string load, string oblast,object o) { // treba obrisati ovo i adaptirati file reader po donjem konstruktoru
+    
+                this.load = load;
+                this.oblast = oblast;
+                //this.tip = tip;
+
+            }
+            public Element(int sat, string load, string oblast,string tip, long vreme,string file_location)
             {
                 this.sat = sat;
                 this.load = load;
                 this.oblast = oblast;
                 this.tip = tip;
+                this.vreme = vreme;
+                this.file_location = file_location;
             }
 
-            public string Sat
+            public int Sat
             {
                 get { return sat; }
                 set { sat = value; }
@@ -43,6 +54,18 @@ namespace ERS_pr106_pr119
             {
                 get { return tip; }
                 set { tip = value; }
+            }
+
+            public long Vreme
+            {
+                get { return vreme; }
+                set { vreme = value; }
+            }
+
+            public string File
+            {
+            get { return file_location; }
+            set { file_location = value; }
             }
     }
 
