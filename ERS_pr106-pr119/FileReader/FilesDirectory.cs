@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERS_pr106_pr119.FileReader
 {
-	internal class FilesDirectory
+	public class FilesDirectory
 	{
 		public string[] GetFiles()
 		{
@@ -15,6 +15,15 @@ namespace ERS_pr106_pr119.FileReader
 			string filesDirectory = projectDirectory + "\\xml";
 
 			return Directory.GetFiles(filesDirectory);
+		}
+
+		public string ExportDirectory()
+		{
+			string workingDirectory = Environment.CurrentDirectory;
+			string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+			string filesDirectory = projectDirectory + "\\Exported Tables\\";
+
+			return filesDirectory;
 		}
 	}
 }

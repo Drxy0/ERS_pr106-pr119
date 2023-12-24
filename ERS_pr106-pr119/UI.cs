@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using ERS_pr106_pr119.DTO;
+using ERS_pr106_pr119.Export;
 
 namespace ERS_pr106_pr119
 {
-	internal class UI
+    internal class UI
 	{
 		public UI() { }
 
@@ -20,7 +22,7 @@ namespace ERS_pr106_pr119
 			Console.WriteLine(UIstring);
 		}
 
-		public void IspisOpcije(List<FileDTO> fileDTOs)
+		public ExportDTO IspisOpcije(List<FileDTO> fileDTOs)
 		{
 			Console.Write("Izaberite datum: ");
 			string datum = Console.ReadLine();
@@ -50,18 +52,43 @@ namespace ERS_pr106_pr119
 					}
 				}
 			}
+
+			List<string> rOdstupanja = new List<string>();
+
 			Console.WriteLine(GetFormattedHeader());
 			for (int i = 0; i < Lostv.Count; i++)
 			{
 				double relativnoOdstupanje = ((double.Parse(Lostv[i].Load) - double.Parse(Lprog[i].Load)) / double.Parse(Lostv[i].Load) * 100);
+				string rOdstupanjeString = relativnoOdstupanje.ToString("F2") + " %";
+
+				rOdstupanja.Add(rOdstupanjeString);
 				Console.WriteLine(string.Format("{0,-10} {1,-20} {2,-20} {3, -6} {4, -1}",
 					Lostv[i].Sat, Lostv[i].Load, Lprog[i].Load, relativnoOdstupanje.ToString("F2"), "%"));
 			}
+
+			ExportDTO exportTable = new ExportDTO();
+			exportTable.Oblast = geoOblast;
+			exportTable.Datum = new Datum().SetDatumFromString(datum);
+			exportTable.OstvarenaP = Lostv;
+			exportTable.PrognoziranaP = Lprog;
+			exportTable.Odstupanja = rOdstupanja;
+
+			return exportTable;
 		}
 		private static string GetFormattedHeader()
 		{
 			return string.Format("\n{0,-10} {1,-20} {2,-20} {3,-20}",
 								"SAT", "PROGNOZIRANA P.", "OSTVARENA P.", "RELATIVNO ODSTUPANJE");
+		}
+
+		public bool ExportUpit()
+		{
+			Console.WriteLine("\nDa li želite exportovati ovu tabelu?\n (+) DA\t (-) NE\n");
+			string potvrda = Console.ReadLine();
+
+			if (potvrda == "+") return true;
+			else if (potvrda == "-") return false;
+			return ExportUpit();
 		}
 
 	}
