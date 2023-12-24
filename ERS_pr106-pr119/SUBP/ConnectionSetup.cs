@@ -23,6 +23,13 @@ namespace ERS_pr106_pr119.SUBP
                 ocsb.DataSource = ConnectionParam.LOCAL_DATA_SOURCE;
                 ocsb.UserID = ConnectionParam.USER_ID;
                 ocsb.Password = ConnectionParam.PASSWORD;
+                ocsb.Pooling = true;
+                ocsb.MinPoolSize = 1;
+                ocsb.MaxPoolSize = 10;
+                ocsb.IncrPoolSize = 3;
+                ocsb.ConnectionLifeTime = 5;
+                ocsb.ConnectionTimeout = 30;
+
                 connection = new OracleConnection(ocsb.ConnectionString);
                 
                 
