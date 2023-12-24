@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERS_pr106_pr119.SUBP
 {
-    internal class ConnectionParam
+    public class ConnectionParam
     {
         public static readonly string LOCAL_DATA_SOURCE = "//localhost:1521/xepdb1";
         public static readonly string USER_ID = "potrosnja";
