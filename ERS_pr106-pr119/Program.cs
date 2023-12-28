@@ -30,6 +30,9 @@ namespace ERS_pr106_pr119
 						if (ui.ExportUpit() == true)
 							new ExportToCSV().Export(exportTable);
 						break;
+					case "3":
+						//TODO
+						break;
 				}
 			}
 			while (s != "q");
