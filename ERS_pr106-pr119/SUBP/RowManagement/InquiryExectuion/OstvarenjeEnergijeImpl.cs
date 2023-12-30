@@ -9,7 +9,7 @@ using System.Transactions;
 
 namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 {
-    public class ostvManagementImpl : ostvManagement
+    public class OstvarenjeEnergijeImpl : ostvManagement
     {
 
         public IEnumerable<ERS_pr106_pr119.Element>FindAll()

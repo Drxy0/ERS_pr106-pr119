@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 {
-    public class progManagementImpl : progManagement
+    public class PrognozaEnergijeImpl : progManagement
     {
 
         public IEnumerable<ERS_pr106_pr119.Element> FindAll()

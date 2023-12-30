@@ -11,7 +11,7 @@ namespace ERS_pr106_pr119
 	{
 		static void Main()
 		{
-            //TableCreations();
+            TableCreations();
 
             UI ui = new UI();
 			ReaderXML xmlReader = new ReaderXML();
@@ -50,17 +50,35 @@ namespace ERS_pr106_pr119
 				"CONSTRAINT podrucije_PK PRIMARY KEY (oblast)" +
 				")";
 
+            string sql1 = "CREATE TABLE prog_potrosnja (" +
+                "sat_p integer," +
+                "load_p integer," +
+				"oblast_p varchar(4)," +
+				"tip_p varchar(5)," +
+				"datum_p date," +
+				"vreme_p date," +
+				"file_location_p varchar(255)," +
+				"datumImenaFajla_p date," +
+				"fileName_p varchar(50)," +
+                "CONSTRAINT prog_potrosnja_PK PRIMARY KEY (sat_p,fileName_p)" +
+				")";
+
+            string sql2 = "CREATE TABLE ostv_potrosnja (" +
+                "sat_o integer," +
+                "load_o integer," +
+				"oblast_o varchar(4)," +
+				"tip_o varchar(5)," +
+				"datum_o date," +
+				"vreme_o date," +
+				"file_location_o varchar(255)," +
+				"datumImenaFajla_o date," +
+				"fileName_o varchar(50)," +
+                "CONSTRAINT ostv_potrosnja_PK PRIMARY KEY (sat_o,fileName_o)" +
+				")";
+
             TablesSetup.CreateTable(sql0);
-
-            string sql_test = "create table test(sat_p int)";
-            string sql1 = "create table prog_potrosnja(sat_p int, load_p int, oblast_p varchar(4),tip_p varchar(5),datum_p date,vreme_p date,file_location_p varchar(255),datumImenaFajla_p date,fileName_p varchar(50))," +
-                "CONSTRAINT prog_potrosnja_PK PRIMARY KEY (sat_p,fileName_p)";
-
-            string sql2 = "create table ostv_potrosnja(sat_o int, load_o int, oblast_o varchar(4),tip_o varchar(5),datum_o date,vreme_o date,file_location_o varchar(255),datumImenaFajla_o date,fileName_o varchar(50))," +
-                "CONSTRAINT ostv_potrosnja_PK PRIMARY KEY (sat_o,fileName_o)";
-
-			//SUBP.TablesSetup.CreateTable(sql_test);
-			//SUBP.TablesSetup.CreateTable(sql2);
+            TablesSetup.CreateTable(sql1);
+            TablesSetup.CreateTable(sql2);
 
 
         }
