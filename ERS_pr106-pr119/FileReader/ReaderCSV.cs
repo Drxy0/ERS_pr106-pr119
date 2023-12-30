@@ -1,4 +1,6 @@
 ﻿using ERS_pr106_pr119.DTO;
+using ERS_pr106_pr119.SUBP.RowManagement;
+using ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion;
 using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
@@ -11,7 +13,9 @@ namespace ERS_pr106_pr119.FileReader
 {
     internal class ReaderCSV : FileReader
 	{
-		public List<FileDTO> Ucitaj()
+
+        private static readonly IPodrucije podrucije = new PodrucijeImpl();
+        public List<FileDTO> Ucitaj()
 		{
 			List<FileDTO> fileDTOs = new();
 			List<Element> list = new List<Element>();
@@ -64,6 +68,8 @@ namespace ERS_pr106_pr119.FileReader
 					string sat = fields[0];
 					string load = fields[1];
 					string oblast = fields[2];
+
+					podrucije.InsertRowFromPotrosnja(oblast);
 
 					Element element = new Element(sat, load, oblast, tip);
 					list.Add(element);

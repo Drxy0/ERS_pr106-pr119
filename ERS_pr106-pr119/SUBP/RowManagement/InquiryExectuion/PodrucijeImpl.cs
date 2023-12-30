@@ -27,9 +27,9 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
         private int SaveRow(GeografskoPodrucije entity, IDbConnection connection)
         {
 
-            string insertSql = "insert into podrucije(oblast, nazivP, velicinaP) values (:oblast, :nazivP, :velicinaP)";
+            string insertSql = "insert into podrucije(oblast, nazivP) values (:oblast, :nazivP)";
 
-            string updateSql = "update prog_potrosnja set oblast=:oblast, nazivP = :nazivP, velicinaP = :velicinaP";
+            string updateSql = "update prog_potrosnja set oblast=:oblast, nazivP = :nazivP";
 
             using (IDbCommand command = connection.CreateCommand())
             {
@@ -37,11 +37,11 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 
                 ParameterManagement.AddParameter(command, "oblast", DbType.String);
                 ParameterManagement.AddParameter(command, "nazivP", DbType.String);
-                ParameterManagement.AddParameter(command, "velicinaP", DbType.Int32);
+               
 
                 ParameterManagement.SetParameterValue(command, "oblast", entity.Oblast);
                 ParameterManagement.SetParameterValue(command, "nazivP", entity.NazivP);
-                ParameterManagement.SetParameterValue(command, "velicinaP", entity.VelicinaP);
+ 
 
                 return command.ExecuteNonQuery();
             }
@@ -74,6 +74,73 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
             }
 
         }
+
+        public void InsertRowFromPotrosnja(string oblast)
+        {
+            string insertSql = "insert into podrucije(oblast, nazivP) values (:oblast,:nazivP)";
+
+            using (IDbConnection connection = ConnectionSetup.GetConnection())
+            {
+                connection.Open();
+                IDbTransaction transaction = connection.BeginTransaction();
+
+                try
+                {
+                    if (!ExistsById(oblast, connection))
+                    {
+                        using (IDbCommand command = connection.CreateCommand())
+                        {
+                            command.CommandText = insertSql;
+
+                            ParameterManagement.AddParameter(command, "oblast", DbType.String);
+                            ParameterManagement.AddParameter(command, "nazivP", DbType.String);
+
+                            command.Prepare();
+
+                            ParameterManagement.SetParameterValue(command, "oblast", oblast);
+                            ParameterManagement.SetParameterValue(command, "nazivP", oblast);
+
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    Console.WriteLine($"Error: {ex.Message}");
+                }
+            }
+        }
+
+        public IEnumerable<GeografskoPodrucije> FindAll()
+        {
+            string query = "select * from podrucije";
+            List<GeografskoPodrucije> ret = new List<GeografskoPodrucije>();
+
+            using (IDbConnection connection = ConnectionSetup.GetConnection())
+            {
+                connection.Open();
+                using (IDbCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = query;
+                    command.Prepare();
+
+                    using (IDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            GeografskoPodrucije gp = new GeografskoPodrucije(reader.GetString(0),reader.GetString(1));
+                            ret.Add(gp);
+                        }
+                    }
+                }
+            }
+            
+            return ret;
+        }
+
+
 
     }
 }

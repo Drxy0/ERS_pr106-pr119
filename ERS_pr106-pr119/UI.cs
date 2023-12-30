@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using ERS_pr106_pr119.DTO;
 using ERS_pr106_pr119.Export;
+using ERS_pr106_pr119.SUBP.RowManagement;
+using ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion;
 
 namespace ERS_pr106_pr119
 {
     internal class UI
 	{
+		private static readonly IPodrucije podrucije = new PodrucijeImpl();
 		public UI() { }
 
 		public void Show()
@@ -24,9 +27,32 @@ namespace ERS_pr106_pr119
 
 		public ExportDTO IspisOpcije(List<FileDTO> fileDTOs)
 		{
-			Console.Write("Izaberite datum: ");
+
+		
+            Console.WriteLine("------------------------------");
+            foreach (FileDTO fileDTOPrint in fileDTOs)
+            {
+             
+                Console.WriteLine(fileDTOPrint.Datum.GetDatum());
+                Console.WriteLine("------------------------------");
+            }
+            Console.WriteLine("\n");
+
+            Console.Write("Izaberite jedan od datuma: ");
 			string datum = Console.ReadLine();
-			Console.Write("Izaberite geografsku oblast: ");
+
+            Console.WriteLine("------------------------------\n");
+
+            foreach (GeografskoPodrucije gp in podrucije.FindAll())
+			{
+                Console.WriteLine("Geografsko podrucije: ");
+                Console.WriteLine(gp.NazivP);
+                Console.WriteLine("Oblast: ");
+                Console.WriteLine(gp.Oblast);
+                Console.WriteLine("------------------------------");
+            }
+
+            Console.Write("\nIzaberite podrucije po oblasti: ");
 			string geoOblast = Console.ReadLine();
 
 			List<Element> Lostv = new List<Element>();

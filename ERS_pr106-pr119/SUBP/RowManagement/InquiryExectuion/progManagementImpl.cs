@@ -9,6 +9,11 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 {
     public class progManagementImpl : progManagement
     {
+
+        public IEnumerable<ERS_pr106_pr119.Element> FindAll()
+        {
+            throw new NotImplementedException();
+        }
         public bool ExistsById(int sat, string fileName, IDbConnection connection)
         {
             string query = "select * from prog_potrosnja where sat_p=:sat_p AND fileName_p=:fileName_p";
