@@ -1,6 +1,7 @@
 ﻿using ERS_pr106_pr119.DTO;
 using ERS_pr106_pr119.Export;
 using ERS_pr106_pr119.FileReader;
+using ERS_pr106_pr119.SUBP;
 using System.IO;
 using System.Xml;
 
@@ -10,8 +11,9 @@ namespace ERS_pr106_pr119
 	{
 		static void Main()
 		{
-			
-			UI ui = new UI();
+            TableCreations();
+
+            UI ui = new UI();
 			ReaderXML xmlReader = new ReaderXML();
 			List<FileDTO> files = new List<FileDTO>();
 			ExportDTO exportTable = new ExportDTO();
@@ -37,20 +39,47 @@ namespace ERS_pr106_pr119
 			}
 			while (s != "q");
 			
-        TableCreations();
+      
         }
 
         public static void TableCreations()
         {
-			string sql_test = "create table test(sat_p int)";
-            string sql1 = "create table prog_potrosnja(sat_p int, load_p int, oblast_p varchar(4),tip_p varchar(5),datum_p date,vreme_p date,file_location_p varchar(255),datumImenaFajla_p date,fileName_p varchar(50))," +
-                "CONSTRAINT prog_potrosnja_PK PRIMARY KEY (sat_p,fileName_p)";
+            string sql0 = "CREATE TABLE podrucije (" +
+				"oblast varchar(4)," +
+				"nazivP varchar(16)," +
+				"CONSTRAINT podrucije_PK PRIMARY KEY (oblast)" +
+				")";
 
-            string sql2 = "create table ostv_potrosnja(sat_o int, load_o int, oblast_o varchar(4),tip_o varchar(5),datum_o date,vreme_o date,file_location_o varchar(255),datumImenaFajla_o date,fileName_o varchar(50))," +
-                "CONSTRAINT prog_potrosnja_PK PRIMARY KEY (sat_o,fileName_o)";
+            string sql1 = "CREATE TABLE prog_potrosnja (" +
+                "sat_p integer," +
+                "load_p integer," +
+				"oblast_p varchar(4)," +
+				"tip_p varchar(5)," +
+				"datum_p date," +
+				"vreme_p date," +
+				"file_location_p varchar(255)," +
+				"datumImenaFajla_p date," +
+				"fileName_p varchar(50)," +
+                "CONSTRAINT prog_potrosnja_PK PRIMARY KEY (sat_p,fileName_p)" +
+				")";
 
-			SUBP.TablesSetup.CreateTable(sql_test);
-            //SUBP.TablesSetup.CreateTable(sql2);
+            string sql2 = "CREATE TABLE ostv_potrosnja (" +
+                "sat_o integer," +
+                "load_o integer," +
+				"oblast_o varchar(4)," +
+				"tip_o varchar(5)," +
+				"datum_o date," +
+				"vreme_o date," +
+				"file_location_o varchar(255)," +
+				"datumImenaFajla_o date," +
+				"fileName_o varchar(50)," +
+                "CONSTRAINT ostv_potrosnja_PK PRIMARY KEY (sat_o,fileName_o)" +
+				")";
+
+            TablesSetup.CreateTable(sql0);
+            TablesSetup.CreateTable(sql1);
+            TablesSetup.CreateTable(sql2);
+
 
         }
 

@@ -5,12 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using ERS_pr106_pr119.DTO;
+using ERS_pr106_pr119.SUBP.RowManagement;
+using ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion;
 
 namespace ERS_pr106_pr119.FileReader
 {
     internal class ReaderXML : FileReader
 	{
-		public List<FileDTO> Ucitaj()
+        private static readonly IPodrucije podrucije = new PodrucijeImpl();
+        public List<FileDTO> Ucitaj()
 		{
 			List<FileDTO> fileDTOs = new();
 			string[] files = new FilesDirectory().GetFiles();
@@ -57,7 +60,9 @@ namespace ERS_pr106_pr119.FileReader
 				string load = child.Item(1).InnerText;
 				string oblast = child.Item(2).InnerText;
 
-				Element element = new Element(sat, load, oblast, tip);
+                podrucije.InsertRowFromPotrosnja(oblast);  //Punjenje tipa entiteta novim oblastima iz XML fajla
+
+                Element element = new Element(sat, load, oblast, tip);
 				list.Add(element);
 			}
 		}
