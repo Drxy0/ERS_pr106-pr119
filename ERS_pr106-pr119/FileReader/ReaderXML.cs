@@ -60,7 +60,7 @@ namespace ERS_pr106_pr119.FileReader
 				string load = child.Item(1).InnerText;
 				string oblast = child.Item(2).InnerText;
 
-                podrucije.InsertRowFromPotrosnja(oblast);
+                podrucije.InsertRowFromPotrosnja(oblast);  //Punjenje tipa entiteta novim oblastima iz XML fajla
 
                 Element element = new Element(sat, load, oblast, tip);
 				list.Add(element);

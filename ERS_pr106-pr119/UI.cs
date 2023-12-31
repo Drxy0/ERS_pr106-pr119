@@ -25,13 +25,13 @@ namespace ERS_pr106_pr119
 			Console.WriteLine(UIstring);
 		}
 
-		public ExportDTO IspisOpcije(List<FileDTO> fileDTOs)
-		{
+		public ExportDTO IspisOpcije(List<FileDTO> fileDTOs) 
+        {
 
 			{
 				Console.WriteLine("------------------------------");
-				foreach (FileDTO fileDTOPrint in fileDTOs)
-				{
+				foreach (FileDTO fileDTOPrint in fileDTOs) //NE VALJA! DATUMI SE PONAVLJAJU!
+                {
 
 					Console.WriteLine(fileDTOPrint.Datum.GetDatum());
 					Console.WriteLine("------------------------------");

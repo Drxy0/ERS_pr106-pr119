@@ -47,7 +47,7 @@ namespace ERS_pr106_pr119.FileReader
 					fileDTO.Elements = list;
 					list.Clear();
 				}
-				fileDTOs.Add(fileDTO);
+				fileDTOs.Add(fileDTO); 
 			}
 			return fileDTOs;
 		}
@@ -69,9 +69,9 @@ namespace ERS_pr106_pr119.FileReader
 					string load = fields[1];
 					string oblast = fields[2];
 
-					podrucije.InsertRowFromPotrosnja(oblast);
+					podrucije.InsertRowFromPotrosnja(oblast); //Punjenje tipa entiteta novim oblastima iz fajla
 
-					Element element = new Element(sat, load, oblast, tip);
+                    Element element = new Element(sat, load, oblast, tip);
 					list.Add(element);
 				}
 			}
