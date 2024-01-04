@@ -8,7 +8,6 @@ namespace ERS_pr106_pr119.SUBP
 {
     public interface TableManagement<T>
     {
-
         IEnumerable<T> FindAll();
         void InsertRows(List<T> listaCeleTabele);
 

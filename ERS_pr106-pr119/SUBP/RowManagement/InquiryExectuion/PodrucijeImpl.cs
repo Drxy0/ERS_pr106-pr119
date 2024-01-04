@@ -70,9 +70,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
                     Console.WriteLine($"Error: {ex.Message}");
                 }
 
-
             }
-
         }
 
         public void InsertRowFromPotrosnja(string oblast)

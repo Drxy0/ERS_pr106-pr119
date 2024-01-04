@@ -11,7 +11,7 @@ using System.Xml;
 
 namespace ERS_pr106_pr119.FileReader
 {
-    internal class ReaderCSV : FileReader
+    internal class ReaderCSV : IFileReader
 	{
 
         private static readonly IPodrucije podrucije = new PodrucijeImpl();
@@ -47,7 +47,7 @@ namespace ERS_pr106_pr119.FileReader
 					fileDTO.Elements = list;
 					list.Clear();
 				}
-				fileDTOs.Add(fileDTO); 
+				fileDTOs.Add(fileDTO);
 			}
 			return fileDTOs;
 		}
@@ -71,8 +71,8 @@ namespace ERS_pr106_pr119.FileReader
 
 					podrucije.InsertRowFromPotrosnja(oblast); //Punjenje tipa entiteta novim oblastima iz fajla
 
-                    Element element = new Element(sat, load, oblast, tip);
-					list.Add(element);
+                    //Element element = new Element(sat, load, oblast, tip);
+					//list.Add(element);
 				}
 			}
 		}

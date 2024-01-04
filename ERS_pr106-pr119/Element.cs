@@ -8,33 +8,23 @@ namespace ERS_pr106_pr119
 {
     public class Element
     {
-            //tip string //string
             private int sat;
             private string load;
             private string oblast;
             private string tip;
-            private DateTime datumUvoza;
-            private DateTime satnicaUvoza;           //TREBA SA NJOM DA VIDIMO DAL TREBA SAMO VREME OD POKRETANJA PROGRAMA ILI I DATUM   
-            private string file_location;
-            private DateTime datumImenaFajla;
+            private string datumUvoza;
+            private string satnicaUvoza;
+		    private string datumImenaFajla;
+		    private string file_location;
             private string fileName;
 
-            public Element(string sat, string load, string oblast,object o) { // treba obrisati ovo i adaptirati file reader po donjem konstruktoru
-    
-                this.load = load;
-                this.oblast = oblast;
-                //this.tip = tip;
-
-            }
-
-            public Element(DateTime datum, String oblast) {
-
+            public Element(string datum, String oblast)
+            {
                 this.datumImenaFajla = datum;
                 this.oblast = oblast;
-
             }
 
-            public Element(int sat, string load, string oblast,string tip, DateTime datumUvoza, DateTime satnicaUvoza,string file_location,DateTime datumImenaFajla,string fileName)
+            public Element(int sat, string load, string oblast,string tip, string datumUvoza, string satnicaUvoza,string file_location,string fileName, string datumImenaFajla)
             {
                 this.sat = sat;
                 this.load = load;
@@ -43,9 +33,9 @@ namespace ERS_pr106_pr119
                 this.datumUvoza = datumUvoza;
                 this.satnicaUvoza = satnicaUvoza;
                 this.file_location = file_location;
-                this.datumImenaFajla = datumImenaFajla;
                 this.fileName = fileName;
-            }
+                this.datumImenaFajla = datumImenaFajla;
+			}
 
             public int Sat
             {
@@ -71,13 +61,13 @@ namespace ERS_pr106_pr119
                 set { tip = value; }
             }
 
-            public DateTime DatumUvoza
+            public string DatumUvoza
             {
                 get { return datumUvoza; }
                 set { datumUvoza = value; }
             }
 
-            public DateTime SatnicaUvoza
+            public string SatnicaUvoza
             {
                 get { return satnicaUvoza; }
                 set { satnicaUvoza = value; }
@@ -88,19 +78,18 @@ namespace ERS_pr106_pr119
             get { return file_location; }
             set { file_location = value; }
             }
-
-            public DateTime DatumImenaFajla
-            {
-            get { return datumImenaFajla; }
-            set { datumImenaFajla = value; }
-            }
-
             public string FileName
             {
             get { return fileName; }
             set { fileName = value; }
             }
-    }
+
+		    public string DatumImenaFajla
+		    {
+			    get { return datumImenaFajla; }
+			    set { datumImenaFajla = value; }
+		    }
+	}
 
 }
 

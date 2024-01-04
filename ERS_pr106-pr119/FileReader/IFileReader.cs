@@ -7,7 +7,7 @@ using ERS_pr106_pr119.DTO;
 
 namespace ERS_pr106_pr119.FileReader
 {
-    internal interface FileReader
+    internal interface IFileReader
 	{
 		public List<FileDTO> Ucitaj();
 	}
