@@ -13,7 +13,10 @@ namespace ERS_pr106_pr119
 {
     internal class UI
 	{
-		private static readonly IPodrucije podrucije = new PodrucijeImpl();
+		private static readonly Ipodrucje podrucje = new podrucjeImpl();
+
+		private static readonly PrognozaEnergijeImpl prognozaImpl = new PrognozaEnergijeImpl();
+		private static readonly OstvarenaEnergijaImpl ostvarenaImpl = new OstvarenaEnergijaImpl();
 		public UI() { }
 
 		public void Show()
@@ -25,68 +28,51 @@ namespace ERS_pr106_pr119
 			Console.WriteLine(UIstring);
 		}
 
-		public ExportDTO IspisOpcije(List<FileDTO> fileDTOs) 
+		public ExportDTO IspisOpcije() 
         {
+			List<Element> prognozaTest = new List<Element>();
+			List<Element> ostvarenaTest = new List<Element>();
+			prognozaTest = prognozaImpl.FindAll().ToList();
+			ostvarenaTest = ostvarenaImpl.FindAll().ToList();
 
-			{
-				Console.WriteLine("------------------------------");
-				foreach (FileDTO fileDTOPrint in fileDTOs) //NE VALJA! DATUMI SE PONAVLJAJU!
-                {
-
-					Console.WriteLine(fileDTOPrint.Datum.GetDatum());
-					Console.WriteLine("------------------------------");
-				}
-				Console.WriteLine("\n");
-			}
-
-            Console.Write("Izaberite jedan od datuma: ");
-			string datum = Console.ReadLine();
-
-			{
-				Console.WriteLine("------------------------------\n");
-
-				foreach (GeografskoPodrucije gp in podrucije.FindAll())
-				{
-					Console.WriteLine("Geografsko podrucije: ");
-					Console.WriteLine(gp.NazivP);
-					Console.WriteLine("Oblast: ");
-					Console.WriteLine(gp.Oblast);
-
-					Console.WriteLine("------------------------------");
-				}
-			}
-            Console.Write("\nIzaberite podrucije po oblasti: ");
-			string geoOblast = Console.ReadLine();
+			string datum = GetInputDate(prognozaTest);
+			string geoOblast = getInputOblast();
 
 			List<Element> Lostv = new List<Element>();
 			List<Element> Lprog = new List<Element>();
 
-			foreach (FileDTO fileDTO in fileDTOs)
+			foreach (Element prognoza in prognozaTest)
 			{
-				if (datum == fileDTO.Datum.GetDatum())
+				if (datum == prognoza.DatumImenaFajla)
 				{
-					foreach (Element el in fileDTO.Elements)
+					if (prognoza.Oblast == geoOblast)
 					{
-						if (el.Oblast == geoOblast)
-						{
-							if (el.Tip == "ostv")
-							{
-								Lostv.Add(el);
-							}
-							else if (el.Tip == "prog")
-							{
-								Lprog.Add(el);
-							}
-						}
+						Lprog.Add(prognoza);
 					}
 				}
 			}
+
+			foreach (Element ostvarena in ostvarenaTest)
+			{
+				if (datum == ostvarena.DatumImenaFajla)
+				{
+					if (ostvarena.Oblast == geoOblast)
+					{
+						Lostv.Add(ostvarena);
+					}
+				}
+			}
+
+			
+			Console.WriteLine("Ostvarena " + Lostv.Count);
+			Console.WriteLine("Prognozirana " + Lprog.Count);
 
 			List<string> rOdstupanja = new List<string>();
 
 			Console.WriteLine(GetFormattedHeader());
 			for (int i = 0; i < Lostv.Count; i++)
 			{
+				//double r2 = double.Parse(Lprog[i].Load);	//error
 				double relativnoOdstupanje = ((double.Parse(Lostv[i].Load) - double.Parse(Lprog[i].Load)) / double.Parse(Lostv[i].Load) * 100);
 				string rOdstupanjeString = relativnoOdstupanje.ToString("F2") + " %";
 
@@ -94,6 +80,7 @@ namespace ERS_pr106_pr119
 				Console.WriteLine(string.Format("{0,-10} {1,-20} {2,-20} {3, -6} {4, -1}",
 					Lostv[i].Sat, Lostv[i].Load, Lprog[i].Load, relativnoOdstupanje.ToString("F2"), "%"));
 			}
+			
 
 			ExportDTO exportTable = new ExportDTO();
 			exportTable.Oblast = geoOblast;
@@ -101,7 +88,7 @@ namespace ERS_pr106_pr119
 			exportTable.OstvarenaP = Lostv;
 			exportTable.PrognoziranaP = Lprog;
 			exportTable.Odstupanja = rOdstupanja;
-
+			
 			return exportTable;
 		}
 		private static string GetFormattedHeader()
@@ -118,6 +105,63 @@ namespace ERS_pr106_pr119
 			if (potvrda == "+") return true;
 			else if (potvrda == "-") return false;
 			return ExportUpit();
+		}
+
+		private string GetInputDate(List<Element> prognozaTest)
+		{
+			var uniqueValues = prognozaTest.Select(el => el.DatumImenaFajla).Distinct();
+			string datum = string.Empty;
+			while (true)
+			{
+				Console.WriteLine("------------------------------");
+				foreach (var value in uniqueValues)
+				{
+					Console.WriteLine(value);
+					Console.WriteLine("------------------------------");
+				}
+				Console.WriteLine("\n");
+				Console.Write("Izaberite jedan od datuma: ");
+				datum = Console.ReadLine();
+				Console.WriteLine();
+
+				if (!string.IsNullOrEmpty(datum))
+				{
+					foreach (var value in uniqueValues)
+					{
+						if (value == datum)
+							return datum;
+					}
+					Console.WriteLine("Nema informacija za taj datum!");
+				}
+			}
+		}
+
+		private string getInputOblast()
+		{
+			string geoOblast = string.Empty;
+			while(true)
+			{
+				Console.WriteLine("------------------------------\n");
+				foreach (Geografskopodrucje gp in podrucje.FindAll())
+				{
+					Console.WriteLine("Geografsko područje: " + gp.NazivP);
+					Console.WriteLine("------------------------------");
+					Console.WriteLine();
+				}
+				Console.Write("\nIzaberite područje: ");
+				geoOblast = Console.ReadLine();
+				Console.WriteLine();
+
+				if (!string.IsNullOrEmpty(geoOblast))
+				{
+					foreach (Geografskopodrucje gp in podrucje.FindAll())
+					{
+						if (geoOblast == gp.NazivP)
+							return geoOblast;
+					}
+					Console.WriteLine("Unesite validno područje!");
+				}
+			}
 		}
 
 	}

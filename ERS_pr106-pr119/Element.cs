@@ -14,9 +14,9 @@ namespace ERS_pr106_pr119
             private string tip;
             private string datumUvoza;
             private string satnicaUvoza;
-		    private string datumImenaFajla;
 		    private string file_location;
-            private string fileName;
+		    private string datumImenaFajla;
+		    private string fileName;
 
             public Element(string datum, String oblast)
             {
@@ -24,7 +24,7 @@ namespace ERS_pr106_pr119
                 this.oblast = oblast;
             }
 
-            public Element(int sat, string load, string oblast,string tip, string datumUvoza, string satnicaUvoza,string file_location,string fileName, string datumImenaFajla)
+            public Element(int sat, string load, string oblast,string tip, string datumUvoza, string satnicaUvoza, string file_location, string datumImenaFajla, string fileName)
             {
                 this.sat = sat;
                 this.load = load;
@@ -33,8 +33,8 @@ namespace ERS_pr106_pr119
                 this.datumUvoza = datumUvoza;
                 this.satnicaUvoza = satnicaUvoza;
                 this.file_location = file_location;
-                this.fileName = fileName;
-                this.datumImenaFajla = datumImenaFajla;
+			    this.datumImenaFajla = datumImenaFajla;
+			    this.fileName = fileName;
 			}
 
             public int Sat

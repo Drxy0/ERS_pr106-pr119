@@ -14,7 +14,7 @@ namespace ERS_pr106_pr119.FileReader
     internal class ReaderCSV : IFileReader
 	{
 
-        private static readonly IPodrucije podrucije = new PodrucijeImpl();
+        private static readonly Ipodrucje podrucje = new podrucjeImpl();
         public List<FileDTO> Ucitaj()
 		{
 			List<FileDTO> fileDTOs = new();
@@ -69,7 +69,7 @@ namespace ERS_pr106_pr119.FileReader
 					string load = fields[1];
 					string oblast = fields[2];
 
-					podrucije.InsertRowFromPotrosnja(oblast); //Punjenje tipa entiteta novim oblastima iz fajla
+					podrucje.InsertRowFromPotrosnja(oblast); //Punjenje tipa entiteta novim oblastima iz fajla
 
                     //Element element = new Element(sat, load, oblast, tip);
 					//list.Add(element);

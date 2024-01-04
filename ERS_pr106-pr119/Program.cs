@@ -2,6 +2,7 @@
 using ERS_pr106_pr119.Export;
 using ERS_pr106_pr119.FileReader;
 using ERS_pr106_pr119.SUBP;
+using ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion;
 using System.IO;
 using System.Xml;
 
@@ -13,7 +14,10 @@ namespace ERS_pr106_pr119
 		{
 			TablesSetup.TableCreations();
 
-            UI ui = new UI();
+			PrognozaEnergijeImpl prognozaImpl = new PrognozaEnergijeImpl();
+			OstvarenaEnergijaImpl ostvarenaImpl = new OstvarenaEnergijaImpl();
+
+			UI ui = new UI();
 			ReaderXML xmlReader = new ReaderXML();
 			List<FileDTO> files = new List<FileDTO>();
 			ExportDTO exportTable = new ExportDTO();
@@ -28,7 +32,7 @@ namespace ERS_pr106_pr119
 						files = xmlReader.Ucitaj();
 						break;
 					case "2":
-						exportTable = ui.IspisOpcije(files);
+						exportTable = ui.IspisOpcije();
 						if (ui.ExportUpit() == true)
 							new ExportToCSV().Export(exportTable);
 						break;

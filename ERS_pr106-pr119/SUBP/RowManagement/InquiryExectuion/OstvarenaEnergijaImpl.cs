@@ -14,7 +14,32 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 
 		public IEnumerable<ERS_pr106_pr119.Element> FindAll()
 		{
-			throw new NotImplementedException();
+			string query = "select * from ostv_potrosnja";
+			List<Element> elementList = new List<Element>();
+
+			using (IDbConnection connection = ConnectionSetup.GetConnection())
+			{
+				connection.Open();
+				using (IDbCommand command = connection.CreateCommand())
+				{
+					command.CommandText = query;
+					command.Prepare();
+
+					using (IDataReader reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							Element element = new Element(reader.GetInt32(0), reader.GetString(1),
+														  reader.GetString(2), reader.GetString(3),
+														  reader.GetString(4), reader.GetString(5),
+														  reader.GetString(6), reader.GetString(8), reader.GetString(7));
+							elementList.Add(element);
+						}
+					}
+				}
+			}
+
+			return elementList;
 		}
 		public bool ExistsById(int sat_o, string oblast_o, string fileName_o, IDbConnection connection)
 		{

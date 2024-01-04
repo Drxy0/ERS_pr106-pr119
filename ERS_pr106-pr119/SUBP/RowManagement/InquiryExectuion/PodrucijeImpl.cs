@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 {
-    public class PodrucijeImpl : IPodrucije
+    public class podrucjeImpl : Ipodrucje
     {
         public bool ExistsById(string oblast, IDbConnection connection)
         {
-            string query = "select * from podrucije where oblast=:oblast";
+            string query = "select * from podrucje where oblast=:oblast";
 
             using (IDbCommand command = connection.CreateCommand())
             {
@@ -24,10 +24,10 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
             }
 
         }
-        private int SaveRow(GeografskoPodrucije entity, IDbConnection connection)
+        private int SaveRow(Geografskopodrucje entity, IDbConnection connection)
         {
 
-            string insertSql = "insert into podrucije(oblast, nazivP) values (:oblast, :nazivP)";
+            string insertSql = "insert into podrucje(oblast, nazivP) values (:oblast, :nazivP)";
 
             string updateSql = "update prog_potrosnja set oblast=:oblast, nazivP = :nazivP";
 
@@ -47,7 +47,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
             }
 
         }
-        public void InsertRows(List<GeografskoPodrucije> listaCeleTabele) {
+        public void InsertRows(List<Geografskopodrucje> listaCeleTabele) {
 
             int numSaved = 0;
 
@@ -57,7 +57,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
                 IDbTransaction transaction = connection.BeginTransaction();
                 try
                 {
-                    foreach (GeografskoPodrucije entity in listaCeleTabele)
+                    foreach (Geografskopodrucje entity in listaCeleTabele)
                     {
                         numSaved += SaveRow(entity, connection);
                     }
@@ -75,7 +75,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 
         public void InsertRowFromPotrosnja(string oblast)
         {
-            string insertSql = "insert into podrucije(oblast, nazivP) values (:oblast,:nazivP)";
+            string insertSql = "insert into podrucje(oblast, nazivP) values (:oblast,:nazivP)";
 
             using (IDbConnection connection = ConnectionSetup.GetConnection())
             {
@@ -111,10 +111,10 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
             }
         }
 
-        public IEnumerable<GeografskoPodrucije> FindAll()
+        public IEnumerable<Geografskopodrucje> FindAll()
         {
-            string query = "select * from podrucije";
-            List<GeografskoPodrucije> ret = new List<GeografskoPodrucije>();
+            string query = "select * from podrucje";
+            List<Geografskopodrucje> ret = new List<Geografskopodrucje>();
 
             using (IDbConnection connection = ConnectionSetup.GetConnection())
             {
@@ -128,7 +128,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
                     {
                         while (reader.Read())
                         {
-                            GeografskoPodrucije gp = new GeografskoPodrucije(reader.GetString(0),reader.GetString(1));
+                            Geografskopodrucje gp = new Geografskopodrucje(reader.GetString(0),reader.GetString(1));
                             ret.Add(gp);
                         }
                     }

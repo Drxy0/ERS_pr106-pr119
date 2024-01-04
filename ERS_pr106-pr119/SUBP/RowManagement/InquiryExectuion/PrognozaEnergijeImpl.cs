@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,31 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 
 		public IEnumerable<ERS_pr106_pr119.Element> FindAll()
 		{
-			throw new NotImplementedException();
+			string query = "select * from prog_potrosnja";
+			List<Element> elementList = new List<Element>();
+
+			using (IDbConnection connection = ConnectionSetup.GetConnection())
+			{
+				connection.Open();
+				using (IDbCommand command = connection.CreateCommand())
+				{
+					command.CommandText = query;
+					command.Prepare();
+
+					using (IDataReader reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							Element element = new Element(reader.GetInt32(0), reader.GetString(1),
+														  reader.GetString(2), reader.GetString(3),
+														  reader.GetString(4), reader.GetString(5),
+														  reader.GetString(6), reader.GetString(8), reader.GetString(7));
+							elementList.Add(element);
+						}
+					}
+				}
+			}
+			return elementList;
 		}
 		public bool ExistsById(int sat_p, string oblast_p, string fileName_p, IDbConnection connection)
 		{
@@ -111,7 +136,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 
 			List<Element> ret = new List<Element>();
 
-			string query = "SELECT sat_p,load_p FROM prog_potrosnja WHERE datumImenaFajla_p : = datumImenaFajla_p AND oblast_p = : oblast_p ";
+			string query = "SELECT sat_p,load_p FROM prog_potrosnja WHERE datumImenaFajla_p : = datumImenaFajla_p AND oblast_p = : oblast_p";
 
 			using (IDbConnection connection = ConnectionSetup.GetConnection())
 			{

@@ -15,7 +15,7 @@ namespace ERS_pr106_pr119.FileReader
 	{
 		private static readonly PrognozaEnergijeImpl prognozaImpl = new PrognozaEnergijeImpl();
 		private static readonly OstvarenaEnergijaImpl ostvarenaImpl = new OstvarenaEnergijaImpl();
-		private static readonly IPodrucije podrucije = new PodrucijeImpl();
+		private static readonly Ipodrucje podrucje = new podrucjeImpl();
 		public List<FileDTO> Ucitaj()
 		{
 			List<FileDTO> fileDTOs = new();
@@ -57,10 +57,20 @@ namespace ERS_pr106_pr119.FileReader
 				}
 
 			}
+			prognozaImpl.InsertRows(listPrognozirana);
+			ostvarenaImpl.InsertRows(listOstvarena);
 
-	
-				prognozaImpl.InsertRows(listPrognozirana);
-			//	ostvarenaImpl.InsertRows(listOstvarena);
+			List<Element> losta = new List<Element>();
+			losta = ostvarenaImpl.FindAll().ToList();
+			List<Element> lprog = new List<Element>();
+			lprog = prognozaImpl.FindAll().ToList();
+
+			Console.WriteLine(listPrognozirana.Count);		//lista kolko ima
+			Console.WriteLine(listOstvarena.Count);         //lista kolko ima
+			Console.WriteLine();
+			Console.WriteLine(lprog.Count);					//lista kolko je ubačeno u bazu
+			Console.WriteLine(losta.Count);                 //lista kolko je ubačeno u bazu
+
 
 			return fileDTOs;
 		}
@@ -85,7 +95,7 @@ namespace ERS_pr106_pr119.FileReader
 				string load = child.Item(1).InnerText;
 				string oblast = child.Item(2).InnerText;
 
-				podrucije.InsertRowFromPotrosnja(oblast);  //Punjenje tipa entiteta novim oblastima iz XML fajla
+				podrucje.InsertRowFromPotrosnja(oblast);  //Punjenje tipa entiteta novim oblastima iz XML fajla
 
 				Element element = new Element(Int32.Parse(sat),
 											 load,

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ERS_pr106_pr119
 {
-    public class GeografskoPodrucije
+    public class Geografskopodrucje
     {
         private string oblast;
         private string nazivP;
 
-        public GeografskoPodrucije(string oblast, string naziv)
+        public Geografskopodrucje(string oblast, string naziv)
         {
             this.oblast = oblast;
             this.nazivP = naziv;

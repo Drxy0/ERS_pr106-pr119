@@ -52,10 +52,10 @@ namespace ERS_pr106_pr119.SUBP
 
 		public static void TableCreations()
 		{
-			string sql0 = "CREATE TABLE podrucije (" +
+			string sql0 = "CREATE TABLE podrucje (" +
 				"oblast varchar(4)," +
 				"nazivP varchar(16)," +
-				"CONSTRAINT podrucije_PK PRIMARY KEY (oblast)" +
+				"CONSTRAINT podrucje_PK PRIMARY KEY (oblast)" +
 				")";
 
 			string sql1 = "CREATE TABLE prog_potrosnja (" +
@@ -83,6 +83,14 @@ namespace ERS_pr106_pr119.SUBP
 				"fileName_o varchar(50)," +
 				"CONSTRAINT ostv_potrosnja_PK PRIMARY KEY (sat_o,fileName_o,oblast_o)" +
 				")";
+
+			string sql0Drop = "drop table podrucje";
+			string sql1Drop = "drop table prog_potrosnja";
+			string sql2Drop = "drop table ostv_potrosnja";
+
+			ExecuteNonQuery(sql0Drop);
+			ExecuteNonQuery(sql1Drop);
+			ExecuteNonQuery(sql2Drop);
 
 			TablesSetup.CreateTable(sql0);
 			TablesSetup.CreateTable(sql1);
