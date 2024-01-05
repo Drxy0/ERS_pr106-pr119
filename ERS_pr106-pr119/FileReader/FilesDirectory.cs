@@ -16,7 +16,6 @@ namespace ERS_pr106_pr119.FileReader
 
 			return Directory.GetFiles(filesDirectory);
 		}
-
 		public string ExportDirectory()
 		{
 			string workingDirectory = Environment.CurrentDirectory;

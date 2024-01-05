@@ -42,7 +42,6 @@ namespace ERS_pr106_pr119
 				}
 			}
 			while (s != "q");
-			
         }
     }
 }

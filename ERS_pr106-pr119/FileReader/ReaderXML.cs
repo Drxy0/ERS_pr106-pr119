@@ -60,18 +60,6 @@ namespace ERS_pr106_pr119.FileReader
 			prognozaImpl.InsertRows(listPrognozirana);
 			ostvarenaImpl.InsertRows(listOstvarena);
 
-			List<Element> losta = new List<Element>();
-			losta = ostvarenaImpl.FindAll().ToList();
-			List<Element> lprog = new List<Element>();
-			lprog = prognozaImpl.FindAll().ToList();
-
-			Console.WriteLine(listPrognozirana.Count);		//lista kolko ima
-			Console.WriteLine(listOstvarena.Count);         //lista kolko ima
-			Console.WriteLine();
-			Console.WriteLine(lprog.Count);					//lista kolko je ubačeno u bazu
-			Console.WriteLine(losta.Count);                 //lista kolko je ubačeno u bazu
-
-
 			return fileDTOs;
 		}
 
@@ -114,7 +102,6 @@ namespace ERS_pr106_pr119.FileReader
 				{
 					listPrognozirana.Add(element);
 				}
-
 			}
 		}
 

@@ -41,7 +41,17 @@ namespace ERS_pr106_pr119
 			List<Element> Lostv = new List<Element>();
 			List<Element> Lprog = new List<Element>();
 
-			foreach (Element prognoza in prognozaTest)
+			Lprog = prognozaImpl.PullProgPotrosnjaByDateAndArea(datum, geoOblast);
+			Lprog = ostvarenaImpl.PullOstvPotrosnjaByDateAndArea(datum, geoOblast);
+
+			Console.WriteLine(Lostv.Count);
+			Console.WriteLine(Lprog.Count);
+			Console.WriteLine(prognozaTest.Count);
+			Console.WriteLine(ostvarenaTest.Count);
+
+
+
+			/*foreach (Element prognoza in prognozaTest)
 			{
 				if (datum == prognoza.DatumImenaFajla)
 				{
@@ -61,18 +71,13 @@ namespace ERS_pr106_pr119
 						Lostv.Add(ostvarena);
 					}
 				}
-			}
-
-			
-			Console.WriteLine("Ostvarena " + Lostv.Count);
-			Console.WriteLine("Prognozirana " + Lprog.Count);
+			}*/
 
 			List<string> rOdstupanja = new List<string>();
 
 			Console.WriteLine(GetFormattedHeader());
 			for (int i = 0; i < Lostv.Count; i++)
 			{
-				//double r2 = double.Parse(Lprog[i].Load);	//error
 				double relativnoOdstupanje = ((double.Parse(Lostv[i].Load) - double.Parse(Lprog[i].Load)) / double.Parse(Lostv[i].Load) * 100);
 				string rOdstupanjeString = relativnoOdstupanje.ToString("F2") + " %";
 

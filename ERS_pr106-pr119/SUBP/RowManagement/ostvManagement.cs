@@ -8,6 +8,6 @@ namespace ERS_pr106_pr119.SUBP.RowManagement
 {
     public interface ostvManagement : TableManagement<Element>
     {
-        List<Element> PullOstvPotrosnjaByDateAndArea(DateTime datum,string oblast);
+        List<Element> PullOstvPotrosnjaByDateAndArea(string datum,string oblast);
     }
 }

@@ -131,12 +131,12 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 			}
 		}
 
-		public List<Element> PullProgPotrosnjaByDateAndArea(DateTime datum, string OBLAST)
+		public List<Element> PullProgPotrosnjaByDateAndArea(string datum, string OBLAST)
 		{
 
 			List<Element> ret = new List<Element>();
 
-			string query = "SELECT sat_p,load_p FROM prog_potrosnja WHERE datumImenaFajla_p : = datumImenaFajla_p AND oblast_p = : oblast_p";
+			string query = "SELECT * FROM prog_potrosnja WHERE datumImenaFajla_p = : datumImenaFajla_p AND oblast_p = : oblast_p";
 
 			using (IDbConnection connection = ConnectionSetup.GetConnection())
 			{
@@ -156,7 +156,10 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 					{
 						while (reader.Read())
 						{
-							Element element = new Element(reader.GetString(0), reader.GetString(1));
+							Element element = new Element(reader.GetInt32(0), reader.GetString(1),
+														  reader.GetString(2), reader.GetString(3),
+														  reader.GetString(4), reader.GetString(5),
+														  reader.GetString(6), reader.GetString(8), reader.GetString(7));
 							ret.Add(element);
 						}
 					}
@@ -164,9 +167,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 				}
 
 			}
-
 			return ret;
-
 		}
 	}
 }
