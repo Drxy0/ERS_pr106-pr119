@@ -8,6 +8,7 @@ using ERS_pr106_pr119.DTO;
 using ERS_pr106_pr119.Export;
 using ERS_pr106_pr119.SUBP.RowManagement;
 using ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ERS_pr106_pr119
 {
@@ -36,42 +37,15 @@ namespace ERS_pr106_pr119
 			ostvarenaTest = ostvarenaImpl.FindAll().ToList();
 
 			string datum = GetInputDate(prognozaTest);
+			if (datum == "q") { return null; }
 			string geoOblast = getInputOblast();
+			if (geoOblast == "q") { return null; }
 
 			List<Element> Lostv = new List<Element>();
 			List<Element> Lprog = new List<Element>();
 
 			Lprog = prognozaImpl.PullProgPotrosnjaByDateAndArea(datum, geoOblast);
-			Lprog = ostvarenaImpl.PullOstvPotrosnjaByDateAndArea(datum, geoOblast);
-
-			Console.WriteLine(Lostv.Count);
-			Console.WriteLine(Lprog.Count);
-			Console.WriteLine(prognozaTest.Count);
-			Console.WriteLine(ostvarenaTest.Count);
-
-
-
-			/*foreach (Element prognoza in prognozaTest)
-			{
-				if (datum == prognoza.DatumImenaFajla)
-				{
-					if (prognoza.Oblast == geoOblast)
-					{
-						Lprog.Add(prognoza);
-					}
-				}
-			}
-
-			foreach (Element ostvarena in ostvarenaTest)
-			{
-				if (datum == ostvarena.DatumImenaFajla)
-				{
-					if (ostvarena.Oblast == geoOblast)
-					{
-						Lostv.Add(ostvarena);
-					}
-				}
-			}*/
+			Lostv = ostvarenaImpl.PullOstvPotrosnjaByDateAndArea(datum, geoOblast);
 
 			List<string> rOdstupanja = new List<string>();
 
@@ -85,7 +59,6 @@ namespace ERS_pr106_pr119
 				Console.WriteLine(string.Format("{0,-10} {1,-20} {2,-20} {3, -6} {4, -1}",
 					Lostv[i].Sat, Lostv[i].Load, Lprog[i].Load, relativnoOdstupanje.ToString("F2"), "%"));
 			}
-			
 
 			ExportDTO exportTable = new ExportDTO();
 			exportTable.Oblast = geoOblast;
@@ -105,7 +78,7 @@ namespace ERS_pr106_pr119
 		public bool ExportUpit()
 		{
 			Console.WriteLine("\nDa li želite exportovati ovu tabelu?\n (+) DA\t (-) NE\n");
-			string potvrda = Console.ReadLine();
+			string? potvrda = Console.ReadLine();
 
 			if (potvrda == "+") return true;
 			else if (potvrda == "-") return false;
@@ -114,8 +87,8 @@ namespace ERS_pr106_pr119
 
 		private string GetInputDate(List<Element> prognozaTest)
 		{
+			string? datum = string.Empty;
 			var uniqueValues = prognozaTest.Select(el => el.DatumImenaFajla).Distinct();
-			string datum = string.Empty;
 			while (true)
 			{
 				Console.WriteLine("------------------------------");
@@ -125,12 +98,15 @@ namespace ERS_pr106_pr119
 					Console.WriteLine("------------------------------");
 				}
 				Console.WriteLine("\n");
-				Console.Write("Izaberite jedan od datuma: ");
+				Console.Write("Izaberite jedan od datuma (q - exit): ");
 				datum = Console.ReadLine();
 				Console.WriteLine();
 
 				if (!string.IsNullOrEmpty(datum))
 				{
+					if (datum == "q")
+						return datum;
+
 					foreach (var value in uniqueValues)
 					{
 						if (value == datum)
@@ -143,7 +119,7 @@ namespace ERS_pr106_pr119
 
 		private string getInputOblast()
 		{
-			string geoOblast = string.Empty;
+			string? geoOblast = string.Empty;
 			while(true)
 			{
 				Console.WriteLine("------------------------------\n");
@@ -153,12 +129,14 @@ namespace ERS_pr106_pr119
 					Console.WriteLine("------------------------------");
 					Console.WriteLine();
 				}
-				Console.Write("\nIzaberite područje: ");
+				Console.Write("\nIzaberite područje (q - exit): ");
 				geoOblast = Console.ReadLine();
 				Console.WriteLine();
 
 				if (!string.IsNullOrEmpty(geoOblast))
 				{
+					if (geoOblast == "q")
+						return geoOblast;
 					foreach (Geografskopodrucje gp in podrucje.FindAll())
 					{
 						if (geoOblast == gp.NazivP)

@@ -14,30 +14,24 @@ namespace ERS_pr106_pr119
 		{
 			TablesSetup.TableCreations();
 
-			PrognozaEnergijeImpl prognozaImpl = new PrognozaEnergijeImpl();
-			OstvarenaEnergijaImpl ostvarenaImpl = new OstvarenaEnergijaImpl();
-
 			UI ui = new UI();
 			ReaderXML xmlReader = new ReaderXML();
-			List<FileDTO> files = new List<FileDTO>();
 			ExportDTO exportTable = new ExportDTO();
 			string? s;
 			do {
 				ui.Show();
 				s = Console.ReadLine();
-
 				switch (s)
 				{
 					case "1":
-						files = xmlReader.Ucitaj();
+						xmlReader.Ucitaj();
 						break;
 					case "2":
 						exportTable = ui.IspisOpcije();
+						if (exportTable == null)
+							break;
 						if (ui.ExportUpit() == true)
 							new ExportToCSV().Export(exportTable);
-						break;
-					case "3":
-						//TODO
 						break;
 				}
 			}

@@ -84,17 +84,28 @@ namespace ERS_pr106_pr119.SUBP
 				"CONSTRAINT ostv_potrosnja_PK PRIMARY KEY (sat_o,fileName_o,oblast_o)" +
 				")";
 
+			string sql_audit = "CREATE TABLE audit_table (" +
+				"vrijeme_ucitavanja varchar(50), " +
+				"ime_fajla varchar(50), " +
+				"lokacija_fajla varchar(255), " +
+				"broj_redova integer " +
+				")";
+
+
 			string sql0Drop = "drop table podrucje";
 			string sql1Drop = "drop table prog_potrosnja";
 			string sql2Drop = "drop table ostv_potrosnja";
+			string sqlAuditDrop = "drop table audit_table";
 
 			ExecuteNonQuery(sql0Drop);
 			ExecuteNonQuery(sql1Drop);
 			ExecuteNonQuery(sql2Drop);
+			ExecuteNonQuery(sqlAuditDrop);
 
 			TablesSetup.CreateTable(sql0);
 			TablesSetup.CreateTable(sql1);
 			TablesSetup.CreateTable(sql2);
+			TablesSetup.CreateTable(sql_audit);
 		}
 
 	}

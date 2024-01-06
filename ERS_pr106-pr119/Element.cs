@@ -8,15 +8,15 @@ namespace ERS_pr106_pr119
 {
     public class Element
     {
-            private int sat;
-            private string load;
-            private string oblast;
-            private string tip;
-            private string datumUvoza;
-            private string satnicaUvoza;
-		    private string file_location;
-		    private string datumImenaFajla;
-		    private string fileName;
+            private int sat = 0;
+            private string load = string.Empty;
+            private string oblast = string.Empty;
+            private string tip = string.Empty;
+            private string datumUvoza = string.Empty;
+            private string satnicaUvoza = string.Empty;
+		    private string file_location = string.Empty;
+		    private string datumImenaFajla = string.Empty;
+		    private string fileName = string.Empty;
 
             public Element(string datum, String oblast)
             {

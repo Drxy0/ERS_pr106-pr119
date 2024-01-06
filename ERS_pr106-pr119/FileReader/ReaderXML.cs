@@ -15,23 +15,23 @@ namespace ERS_pr106_pr119.FileReader
 	{
 		private static readonly PrognozaEnergijeImpl prognozaImpl = new PrognozaEnergijeImpl();
 		private static readonly OstvarenaEnergijaImpl ostvarenaImpl = new OstvarenaEnergijaImpl();
+		private static readonly AuditTableImpl auditTable = new AuditTableImpl();
 		private static readonly Ipodrucje podrucje = new podrucjeImpl();
-		public List<FileDTO> Ucitaj()
+		public void Ucitaj()
 		{
-			List<FileDTO> fileDTOs = new();
 			string[] files = new FilesDirectory().GetFiles();
-
-			List<Element> listOstvarena = new List<Element>();
-			List<Element> listPrognozirana = new List<Element>();
 
 			foreach (string file in files)
 			{
+				List<Element> listOstvarena = new List<Element>();
+				List<Element> listPrognozirana = new List<Element>();
+
 				string fileName = Path.GetFileName(file);
 				
 				string[] extension = fileName.Split('.');
 				string[] nameComponents = extension[0].Split('_');
 
-				string tip = nameComponents[0]; //tip
+				string tip = nameComponents[0];
 				string godina = nameComponents[1];
 				string mjesec = nameComponents[2];
 				string dan = nameComponents[3];
@@ -40,27 +40,18 @@ namespace ERS_pr106_pr119.FileReader
 				string datumUvoza = string.Empty;
 				string satnicaUvoza = string.Empty;
 				GetCurrentTime(ref datumUvoza, ref satnicaUvoza);
-
-				FileDTO fileDTO = new FileDTO();
-
 				string datumImenaFajla = dan + "." + mjesec + "." + godina + ".";
-				fileDTO.Datum = new Datum(dan, mjesec, godina);
-
-
+				
 				string fileExtension = Path.GetExtension(file);
-
 				if (fileExtension == ".xml")
 				{
 					ProcessXML(ref listOstvarena, ref listPrognozirana, file, tip, datumUvoza, satnicaUvoza, fileName, datumImenaFajla);
-					fileDTO.Elements = listOstvarena;
-					fileDTOs.Add(fileDTO);
 				}
 
-			}
-			prognozaImpl.InsertRows(listPrognozirana);
-			ostvarenaImpl.InsertRows(listOstvarena);
+				prognozaImpl.InsertRows(listPrognozirana);
+				ostvarenaImpl.InsertRows(listOstvarena);
 
-			return fileDTOs;
+			}
 		}
 
 		private void ProcessXML(ref List<Element> listOstvarena,
@@ -69,15 +60,33 @@ namespace ERS_pr106_pr119.FileReader
 								string tip,
 								string datumUvoza,
 								string satnicaUvoza,
-								string fileName,
-								string datumImenaFajla)
+								string datumImenaFajla,
+								string fileName)
 		{
 			XmlDocument xmlDoc = new XmlDocument();
-			xmlDoc.Load(file);
+			try
+			{
+				xmlDoc.Load(file);          //absolute address to file
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("Error trying to read the file");
+				Console.WriteLine(e.Message); return;
+			}
+
+			List<Element> listOstvarenaTest = new List<Element>();
+			List<Element> listPrognoziranaTest = new List<Element>();
+
 
 			foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes)
 			{
 				XmlNodeList child = node.ChildNodes;
+
+				if (child == null)
+				{
+					Console.WriteLine("File format invalid!");
+					continue;
+				}
 
 				string sat = child.Item(0).InnerText;
 				string load = child.Item(1).InnerText;
@@ -94,15 +103,74 @@ namespace ERS_pr106_pr119.FileReader
 											 file,
 											 fileName,
 											 datumImenaFajla);
+
 				if (element.Tip == "ostv")
 				{
-					listOstvarena.Add(element);
+					listOstvarenaTest.Add(element);
 				}
 				else if (element.Tip == "prog")
 				{
-					listPrognozirana.Add(element);
+					listPrognoziranaTest.Add(element);
 				}
 			}
+
+			bool invalidFileOccured = CheckFileValidity(listOstvarenaTest, listPrognoziranaTest, file);
+
+			if (invalidFileOccured == false)
+			{
+				listOstvarena = listOstvarenaTest;
+				listPrognozirana = listPrognoziranaTest;
+			}
+		}
+
+
+		private bool CheckFileValidity(List<Element> listOstvarenaTest, List<Element> listPrognoziranaTest, string file)
+		{
+			var uniqueOblastValuesOstvarena = listOstvarenaTest.Select(e => e.Oblast).Distinct().ToList();
+			foreach (string value in uniqueOblastValuesOstvarena)
+			{
+				var occurrenceCountOstvarena = listOstvarenaTest.Count(e => e.Oblast == value);
+				if (occurrenceCountOstvarena != 23 && occurrenceCountOstvarena != 24 && occurrenceCountOstvarena != 25)
+				{
+					DateTime vrijemeUcitavanja = DateTime.Now;
+					string imeFajla = listOstvarenaTest[0].FileName;
+					string lokacijaFajla = file;
+					int brojRedova = listOstvarenaTest.Count;
+
+					InvalidFile invalidFile = new InvalidFile(vrijemeUcitavanja.ToString(),
+															  imeFajla,
+															  lokacijaFajla,
+															  brojRedova);
+
+					auditTable.InsertSingleRow(invalidFile);
+					Console.WriteLine("File " + imeFajla + " je nevalidan!");
+					return true;
+				}
+			}
+
+			var uniqueOblastValuesPrognozirana = listPrognoziranaTest.Select(e => e.Oblast).Distinct().ToList();
+			foreach (string value in uniqueOblastValuesPrognozirana)
+			{
+				var occurrenceCountPrognozirana = listPrognoziranaTest.Count(e => e.Oblast == value);
+				if (occurrenceCountPrognozirana != 23 && occurrenceCountPrognozirana != 24 && occurrenceCountPrognozirana != 25)
+				{
+					DateTime vrijemeUcitavanja = DateTime.Now;
+					string imeFajla = listPrognoziranaTest[0].FileName;
+					string lokacijaFajla = file;
+					int brojRedova = listPrognoziranaTest.Count;
+
+					InvalidFile invalidFile = new InvalidFile(vrijemeUcitavanja.ToString(),
+															  imeFajla,
+															  lokacijaFajla,
+															  brojRedova);
+
+					auditTable.InsertSingleRow(invalidFile);
+					Console.WriteLine("File " + imeFajla + " je nevalidan!");
+					return true;
+				}
+			}
+
+			return false;
 		}
 
 		private void GetCurrentTime(ref string datumUvoza, ref string satnicaUvoza)
