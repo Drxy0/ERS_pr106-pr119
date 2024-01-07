@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 {
-    public class podrucjeImpl : Ipodrucje
+    public class PodrucjeImpl : IPodrucje
     {
         public bool ExistsById(string oblast, IDbConnection connection)
         {
@@ -24,7 +24,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
             }
 
         }
-        private int SaveRow(Geografskopodrucje entity, IDbConnection connection)
+        public int SaveRow(Geografskopodrucje entity, IDbConnection connection)
         {
 
             string insertSql = "insert into podrucje(oblast, nazivP) values (:oblast, :nazivP)";

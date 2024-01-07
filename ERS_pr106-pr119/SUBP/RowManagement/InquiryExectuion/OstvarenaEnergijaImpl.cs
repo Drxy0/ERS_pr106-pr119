@@ -9,7 +9,7 @@ using System.Transactions;
 
 namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 {
-	public class OstvarenaEnergijaImpl : ostvManagement
+	public class OstvarenaEnergijaImpl : IOstvManagement
 	{
 
 		public IEnumerable<ERS_pr106_pr119.Element> FindAll()
@@ -65,7 +65,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 		}
 
 
-		private int SaveRow(Element entity, IDbConnection connection)
+		public int SaveRow(Element entity, IDbConnection connection)
 		{
 
 			string insertSql = "insert into ostv_potrosnja(sat_o, load_o, oblast_o, tip_o, datumUvoza_o ,satnicaUvoza_o ,file_location_o,datumImenaFajla_o,fileName_o )" +

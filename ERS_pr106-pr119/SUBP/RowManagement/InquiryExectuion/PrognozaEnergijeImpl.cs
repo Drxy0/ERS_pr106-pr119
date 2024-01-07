@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 {
-	public class PrognozaEnergijeImpl : progManagement
+	public class PrognozaEnergijeImpl : IProgManagement
 	{
 
 		public IEnumerable<ERS_pr106_pr119.Element> FindAll()
@@ -61,7 +61,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 			}
 
 		}
-		private int SaveRow(Element entity, IDbConnection connection)
+		public int SaveRow(Element entity, IDbConnection connection)
 		{
 
 			string insertSql = "insert into prog_potrosnja(sat_p, load_p, oblast_p, tip_p, datumUvoza_p ,satnicaUvoza_p ,file_location_p,datumImenaFajla_p,fileName_p )" +

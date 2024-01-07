@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERS_pr106_pr119.SUBP.RowManagement
 {
-    public interface Ipodrucje : TableManagement<Geografskopodrucje>
+    public interface IPodrucje : ITableManagement<Geografskopodrucje>
     {
         public void InsertRowFromPotrosnja(string oblast);
     }
