@@ -29,7 +29,7 @@ namespace ERS_pr106_pr119
 			Console.WriteLine(UIstring);
 		}
 
-		public ExportDTO IspisOpcije() 
+		public ExportDTO IspisOpcije()
         {
 			List<Element> prognozaTest = new List<Element>();
 			List<Element> ostvarenaTest = new List<Element>();

@@ -19,38 +19,57 @@ namespace ERS_pr106_pr119.FileReader
 		private static readonly IPodrucje podrucje = new PodrucjeImpl();
 		public void Ucitaj()
 		{
-			string[] files = new FilesDirectory().GetFiles();
+			string[]? files = new FilesDirectory().GetFiles();
 
-			foreach (string file in files)
+			if (files != null)
 			{
-				List<Element> listOstvarena = new List<Element>();
-				List<Element> listPrognozirana = new List<Element>();
-
-				string fileName = Path.GetFileName(file);
-				
-				string[] extension = fileName.Split('.');
-				string[] nameComponents = extension[0].Split('_');
-
-				string tip = nameComponents[0];
-				string godina = nameComponents[1];
-				string mjesec = nameComponents[2];
-				string dan = nameComponents[3];
-
-
-				string datumUvoza = string.Empty;
-				string satnicaUvoza = string.Empty;
-				GetCurrentTime(ref datumUvoza, ref satnicaUvoza);
-				string datumImenaFajla = dan + "." + mjesec + "." + godina + ".";
-				
-				string fileExtension = Path.GetExtension(file);
-				if (fileExtension == ".xml")
+				foreach (string file in files)
 				{
-					ProcessXML(ref listOstvarena, ref listPrognozirana, file, tip, datumUvoza, satnicaUvoza, fileName, datumImenaFajla);
+					List<Element> listOstvarena = new List<Element>();
+					List<Element> listPrognozirana = new List<Element>();
+
+					string fileName = Path.GetFileName(file);
+					string[] extension = fileName.Split('.');
+
+					string tip = string.Empty;
+					string dan = string.Empty;
+					string mjesec = string.Empty;
+					string godina = string.Empty;
+
+					try
+					{
+						string[] nameComponents = extension[0].Split('_');
+
+						tip = nameComponents[0];
+						godina = nameComponents[1];
+						mjesec = nameComponents[2];
+						dan = nameComponents[3];
+					}
+					catch (Exception ex)
+					{
+						Console.WriteLine("Ime fajla mora biti u formatu 'tip_yyyy_mm_dd'");
+						Console.WriteLine(ex.Message);
+					}
+
+					string datumUvoza = string.Empty;
+					string satnicaUvoza = string.Empty;
+					GetCurrentTime(ref datumUvoza, ref satnicaUvoza);
+					string datumImenaFajla = dan + "." + mjesec + "." + godina + ".";
+
+					string fileExtension = Path.GetExtension(file);
+					if (fileExtension == ".xml")
+					{
+						ProcessXML(ref listOstvarena, ref listPrognozirana, file, tip, datumUvoza, satnicaUvoza, fileName, datumImenaFajla);
+					}
+
+					prognozaImpl.InsertRows(listPrognozirana);
+					ostvarenaImpl.InsertRows(listOstvarena);
+
 				}
-
-				prognozaImpl.InsertRows(listPrognozirana);
-				ostvarenaImpl.InsertRows(listOstvarena);
-
+			}
+			else
+			{
+				Console.WriteLine("Error trying to find files. Expected path ./xml");
 			}
 		}
 
@@ -94,24 +113,34 @@ namespace ERS_pr106_pr119.FileReader
 
 				podrucje.InsertRowFromPotrosnja(oblast);  //Punjenje tipa entiteta novim oblastima iz XML fajla
 
-				Element element = new Element(Int32.Parse(sat),
-											 load,
-											 oblast,
-											 tip,
-											 datumUvoza,
-											 satnicaUvoza,
-											 file,
-											 fileName,
-											 datumImenaFajla);
 
-				if (element.Tip == "ostv")
+				try
 				{
-					listOstvarenaTest.Add(element);
+					Element element = new Element(int.Parse(sat),
+															load,
+															oblast,
+															tip,
+															datumUvoza,
+															satnicaUvoza,
+															file,
+															fileName,
+															datumImenaFajla);
+
+					if (element.Tip == "ostv")
+					{
+						listOstvarenaTest.Add(element);
+					}
+					else if (element.Tip == "prog")
+					{
+						listPrognoziranaTest.Add(element);
+					}
 				}
-				else if (element.Tip == "prog")
+				catch (Exception ex)
 				{
-					listPrognoziranaTest.Add(element);
+					Console.WriteLine("Greška prilikom kreiranja elementa");
+					Console.WriteLine(ex.Message);
 				}
+
 			}
 
 			bool invalidFileOccured = CheckFileValidity(listOstvarenaTest, listPrognoziranaTest, file);

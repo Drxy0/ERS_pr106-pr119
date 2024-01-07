@@ -15,7 +15,6 @@ namespace ERS_pr106_pr119
         {
             this.oblast = oblast;
             this.nazivP = naziv;
-
         }
 
         public string Oblast
