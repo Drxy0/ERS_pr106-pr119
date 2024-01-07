@@ -12,7 +12,7 @@ namespace ERS_pr106_pr119
 	{
 		static void Main()
 		{
-			TablesSetup.TableCreations();
+			TableSetupCommands.TableCreations();
 
 			UI ui = new UI();
 			ReaderXML xmlReader = new ReaderXML();

@@ -61,7 +61,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 			}
 
 		}
-		private int SaveRow(Element entity, IDbConnection connection)
+		public int SaveRow(Element entity, IDbConnection connection)
 		{
 
 			string insertSql = "insert into prog_potrosnja(sat_p, load_p, oblast_p, tip_p, datumUvoza_p ,satnicaUvoza_p ,file_location_p,datumImenaFajla_p,fileName_p )" +
