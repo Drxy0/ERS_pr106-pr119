@@ -14,7 +14,7 @@ namespace ERS_pr106_pr119
 {
     internal class UI
 	{
-		private static readonly Ipodrucje podrucje = new podrucjeImpl();
+		private static readonly IPodrucje podrucje = new PodrucjeImpl();
 
 		private static readonly PrognozaEnergijeImpl prognozaImpl = new PrognozaEnergijeImpl();
 		private static readonly OstvarenaEnergijaImpl ostvarenaImpl = new OstvarenaEnergijaImpl();

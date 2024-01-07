@@ -16,7 +16,7 @@ namespace ERS_pr106_pr119.FileReader
 		private static readonly PrognozaEnergijeImpl prognozaImpl = new PrognozaEnergijeImpl();
 		private static readonly OstvarenaEnergijaImpl ostvarenaImpl = new OstvarenaEnergijaImpl();
 		private static readonly AuditTableImpl auditTable = new AuditTableImpl();
-		private static readonly Ipodrucje podrucje = new podrucjeImpl();
+		private static readonly IPodrucje podrucje = new PodrucjeImpl();
 		public void Ucitaj()
 		{
 			string[] files = new FilesDirectory().GetFiles();

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 {
-    public class podrucjeImpl : Ipodrucje
+    public class PodrucjeImpl : IPodrucje
     {
         public bool ExistsById(string oblast, IDbConnection connection)
         {

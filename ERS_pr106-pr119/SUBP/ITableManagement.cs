@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERS_pr106_pr119.SUBP
 {
-    public interface TableManagement<T>
+    public interface ITableManagement<T>
     {
         IEnumerable<T> FindAll();
         void InsertRows(List<T> listaCeleTabele);

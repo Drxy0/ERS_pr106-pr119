@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ERS_pr106_pr119.SUBP.RowManagement
 {
-    public interface ostvManagement : TableManagement<Element>
+    public interface IProgManagement : ITableManagement<Element>
     {
-        List<Element> PullOstvPotrosnjaByDateAndArea(string datum,string oblast);
+        List<Element> PullProgPotrosnjaByDateAndArea(string datum, string oblast);
     }
 }
