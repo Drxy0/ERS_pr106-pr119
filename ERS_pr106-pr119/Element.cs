@@ -34,7 +34,7 @@ namespace ERS_pr106_pr119
 
                 if (ValidnostDatuma(datumUvoza.Split('/')) == false)
                 {
-                    throw new FormatException("Format datuma mora biti DD/MM/YYYY");
+                    throw new FormatException("Format datuma mora biti DD.MM.YYYY.");
 			    }
                 
 

@@ -13,7 +13,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ERS_pr106_pr119
 {
-    internal class UI
+    public class UI
 	{
 		private static readonly IPodrucje podrucje = new PodrucjeImpl();
 
@@ -53,12 +53,21 @@ namespace ERS_pr106_pr119
 			Console.WriteLine(GetFormattedHeader());
 			for (int i = 0; i < Lostv.Count; i++)
 			{
-				double relativnoOdstupanje = ((double.Parse(Lostv[i].Load) - double.Parse(Lprog[i].Load)) / double.Parse(Lostv[i].Load) * 100);
-				string rOdstupanjeString = relativnoOdstupanje.ToString("F2") + " %";
+				try
+				{
+					double relativnoOdstupanje = ((double.Parse(Lostv[i].Load) - double.Parse(Lprog[i].Load)) / double.Parse(Lostv[i].Load) * 100);
+					string rOdstupanjeString = relativnoOdstupanje.ToString("F2") + " %";
 
-				rOdstupanja.Add(rOdstupanjeString);
-				Console.WriteLine(string.Format("{0,-10} {1,-20} {2,-20} {3, -6} {4, -1}",
-					Lostv[i].Sat, Lostv[i].Load, Lprog[i].Load, relativnoOdstupanje.ToString("F2"), "%"));
+					rOdstupanja.Add(rOdstupanjeString);
+					Console.WriteLine(string.Format("{0,-10} {1,-20} {2,-20} {3, -6} {4, -1}",
+						Lostv[i].Sat, Lostv[i].Load, Lprog[i].Load, relativnoOdstupanje.ToString("F2"), "%"));
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine("Datoteke nemaju jednak broj polja!");
+					Console.WriteLine(ex.Message);
+				}
+
 			}
 
 			ExportDTO exportTable = new ExportDTO();

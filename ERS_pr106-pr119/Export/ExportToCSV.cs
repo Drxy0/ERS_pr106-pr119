@@ -9,7 +9,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ERS_pr106_pr119.Export
 {
-	public class ExportToCSV : ExportTable
+	public class ExportToCSV : IExportTable
 	{
 		public void Export(ExportDTO exportDTO)
 		{
