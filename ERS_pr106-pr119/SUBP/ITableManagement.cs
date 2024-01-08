@@ -12,6 +12,5 @@ namespace ERS_pr106_pr119.SUBP
         IEnumerable<T> FindAll();
         void InsertRows(List<T> listaCeleTabele);
 
-        public int SaveRow(T entity, IDbConnection connection);
     }
 }

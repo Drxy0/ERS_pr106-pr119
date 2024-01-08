@@ -9,7 +9,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 {
     public class PodrucjeImpl : IPodrucje
     {
-        public bool ExistsById(string oblast, IDbConnection connection)
+        private bool ExistsById(string oblast, IDbConnection connection)
         {
             string query = "select * from podrucje where oblast=:oblast";
 
@@ -24,7 +24,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
             }
 
         }
-        public int SaveRow(Geografskopodrucje entity, IDbConnection connection)
+        private int SaveRow(Geografskopodrucje entity, IDbConnection connection)
         {
 
             string insertSql = "insert into podrucje(oblast, nazivP) values (:oblast, :nazivP)";

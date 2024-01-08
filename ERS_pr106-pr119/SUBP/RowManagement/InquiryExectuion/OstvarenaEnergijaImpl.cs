@@ -41,7 +41,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 
 			return elementList;
 		}
-		public bool ExistsById(int sat_o, string oblast_o, string fileName_o, IDbConnection connection)
+		private bool ExistsById(int sat_o, string oblast_o, string fileName_o, IDbConnection connection)
 		{
 			string query = "SELECT * from ostv_potrosnja where sat_o=:sat_o AND oblast_o =:oblast_o AND fileName_o =:fileName_o";
 
@@ -65,7 +65,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 		}
 
 
-		public int SaveRow(Element entity, IDbConnection connection)
+		private int SaveRow(Element entity, IDbConnection connection)
 		{
 
 			string insertSql = "insert into ostv_potrosnja(sat_o, load_o, oblast_o, tip_o, datumUvoza_o ,satnicaUvoza_o ,file_location_o,datumImenaFajla_o,fileName_o )" +
@@ -94,7 +94,9 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 				ParameterManagement.AddParameter(command, "datumImenaFajla_o", DbType.String);
 				ParameterManagement.AddParameter(command, "fileName_o", DbType.String);
 
-				ParameterManagement.SetParameterValue(command, "sat_o", entity.Sat);
+                command.Prepare();
+
+                ParameterManagement.SetParameterValue(command, "sat_o", entity.Sat);
 				ParameterManagement.SetParameterValue(command, "load_o", entity.Load);
 				ParameterManagement.SetParameterValue(command, "oblast_o", entity.Oblast);
 				ParameterManagement.SetParameterValue(command, "tip_o", entity.Tip);

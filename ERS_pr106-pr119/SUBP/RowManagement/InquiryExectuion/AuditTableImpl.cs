@@ -29,7 +29,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 			}
 		}
 
-		public int SaveRow(InvalidFile invalidFile, IDbConnection connection)
+		private int SaveRow(InvalidFile invalidFile, IDbConnection connection)
 		{
 			string insertSql = "insert into audit_table" +
 										"(vrijeme_ucitavanja, ime_fajla, lokacija_fajla, broj_redova)" +

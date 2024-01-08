@@ -8,6 +8,7 @@ using ERS_pr106_pr119.DTO;
 using ERS_pr106_pr119.Export;
 using ERS_pr106_pr119.SUBP.RowManagement;
 using ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion;
+using ERS_pr106_pr119.SUBP.Service;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ERS_pr106_pr119
@@ -16,7 +17,7 @@ namespace ERS_pr106_pr119
 	{
 		private static readonly IPodrucje podrucje = new PodrucjeImpl();
 
-		private static readonly PrognozaEnergijeImpl prognozaImpl = new PrognozaEnergijeImpl();
+		private static readonly PrognozaEnergijeService prognozaImpl = new PrognozaEnergijeService();
 		private static readonly OstvarenaEnergijaImpl ostvarenaImpl = new OstvarenaEnergijaImpl();
 		public UI() { }
 
