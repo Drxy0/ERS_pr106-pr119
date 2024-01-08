@@ -121,3 +121,5 @@ C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119Test\obj\Debug\ne
 C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119Test\obj\Debug\net8.0\ERS_pr106-pr119Test.pdb
 C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119Test\obj\Debug\net8.0\ERS_pr106-pr119Test.genruntimeconfig.cache
 C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119Test\obj\Debug\net8.0\ref\ERS_pr106-pr119Test.dll
+C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119Test\bin\Debug\net8.0\Castle.Core.dll
+C:\Users\drljo\Desktop\Projekat\ERS_pr106-pr119\ERS_pr106-pr119Test\bin\Debug\net8.0\Moq.dll

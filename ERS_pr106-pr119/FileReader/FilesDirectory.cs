@@ -8,12 +8,11 @@ namespace ERS_pr106_pr119.FileReader
 {
 	public class FilesDirectory
 	{
-		public string[]? GetFiles()
+		public string[]? GetFiles(string folderName)
 		{
 			string workingDirectory = Environment.CurrentDirectory;
 			string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-			string filesDirectory = projectDirectory + "\\xml";
-			Console.WriteLine(filesDirectory);
+			string filesDirectory = projectDirectory + "\\" + folderName;
 
 			try
 			{

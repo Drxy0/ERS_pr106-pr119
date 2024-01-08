@@ -15,6 +15,7 @@ namespace ERS_pr106_pr119
 			TableSetupCommands.TableCreations();
 
 			UI ui = new UI();
+			string folderName = "xml";
 			ReaderXML xmlReader = new ReaderXML();
 			ExportDTO exportTable = new ExportDTO();
 			string? s;
@@ -24,7 +25,7 @@ namespace ERS_pr106_pr119
 				switch (s)
 				{
 					case "1":
-						xmlReader.Ucitaj();
+						xmlReader.Ucitaj(folderName);
 						break;
 					case "2":
 						exportTable = ui.IspisOpcije();

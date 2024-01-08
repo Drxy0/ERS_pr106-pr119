@@ -9,6 +9,6 @@ namespace ERS_pr106_pr119.FileReader
 {
     internal interface IFileReader
 	{
-		public void Ucitaj();
+		public void Ucitaj(string folderName);
 	}
 }

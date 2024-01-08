@@ -89,7 +89,5 @@ namespace ERS_pr106_pr119.Tests
 			// Act, Assert
 			Assert.Throws<FormatException>(() => new Element(sat, load, oblast, tip, datumUvoza, satnicaUvoza, fileLocation, datumImenaFajla, fileName));
 		}
-
-		// Add more test cases as needed for other scenarios or edge cases.
 	}
 }

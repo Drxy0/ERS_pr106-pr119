@@ -18,9 +18,9 @@ namespace ERS_pr106_pr119.FileReader
         private static readonly OstvarenaEnergijaService ostvarenaService = new OstvarenaEnergijaService();
         private static readonly AuditTableImpl auditTable = new AuditTableImpl();
 		private static readonly PodrucjeService podrucjeService = new PodrucjeService();
-		public void Ucitaj()
+		public void Ucitaj(string folderName)
 		{
-			string[]? files = new FilesDirectory().GetFiles();
+			string[]? files = new FilesDirectory().GetFiles(folderName);
 
 			if (files != null)
 			{
@@ -65,8 +65,8 @@ namespace ERS_pr106_pr119.FileReader
 
                     prognozaService.InsertRows(listPrognozirana);
                     ostvarenaService.InsertRows(listOstvarena);
-
 				}
+				
 			}
 			else
 			{
