@@ -34,6 +34,7 @@ namespace ERS_pr106_pr119.Tests
 			Assert.AreEqual(fileName, element.FileName);
 		}
 
+		[Test]
 		[TestCase("test123")]
 		[TestCase("_)!ssd")]
 		public void Constructor_InvalidTip_ThrowsArgumentException(string tip)
@@ -52,6 +53,7 @@ namespace ERS_pr106_pr119.Tests
 			Assert.Throws<ArgumentException>(() => new Element(sat, load, oblast, tip, datumUvoza, satnicaUvoza, fileLocation, datumImenaFajla, fileName));
 		}
 
+		[Test]
 		[TestCase("-10")]
 		[TestCase("abc")]
 		public void Constructor_InvalidLoad_ThrowsArgumentException(string load)
@@ -70,6 +72,7 @@ namespace ERS_pr106_pr119.Tests
 			Assert.Throws<ArgumentException>(() => new Element(sat, load, oblast, tip, datumUvoza, satnicaUvoza, fileLocation, datumImenaFajla, fileName));
 		}
 
+		[Test]
 		[TestCase("01-01-2022")]
 		[TestCase("2022/01/01")]
 		[TestCase("01/01")]
