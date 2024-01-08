@@ -29,7 +29,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 
             string insertSql = "insert into podrucje(oblast, nazivP) values (:oblast, :nazivP)";
 
-            string updateSql = "update prog_potrosnja set oblast=:oblast, nazivP = :nazivP";
+            string updateSql = "update podrucje set oblast=:oblast, nazivP = :nazivP";
 
             using (IDbCommand command = connection.CreateCommand())
             {

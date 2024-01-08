@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ERS_pr106_pr119.SUBP.Service
 {
-    public class PodrucijeService
+    public class PodrucjeService
     {
         private static readonly IPodrucje podrucje = new PodrucjeImpl();
 

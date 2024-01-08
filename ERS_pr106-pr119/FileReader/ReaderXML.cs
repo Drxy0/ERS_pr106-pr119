@@ -7,16 +7,17 @@ using System.Xml;
 using ERS_pr106_pr119.DTO;
 using ERS_pr106_pr119.SUBP.RowManagement;
 using ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion;
+using ERS_pr106_pr119.SUBP.Service;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ERS_pr106_pr119.FileReader
 {
 	public class ReaderXML : IFileReader
 	{
-		private static readonly PrognozaEnergijeImpl prognozaImpl = new PrognozaEnergijeImpl();
-		private static readonly OstvarenaEnergijaImpl ostvarenaImpl = new OstvarenaEnergijaImpl();
-		private static readonly AuditTableImpl auditTable = new AuditTableImpl();
-		private static readonly IPodrucje podrucje = new PodrucjeImpl();
+        private static readonly PrognozaEnergijeService prognozaService = new PrognozaEnergijeService();
+        private static readonly OstvarenaEnergijaService ostvarenaService = new OstvarenaEnergijaService();
+        private static readonly AuditTableImpl auditTable = new AuditTableImpl();
+		private static readonly PodrucjeService podrucjeService = new PodrucjeService();
 		public void Ucitaj()
 		{
 			string[]? files = new FilesDirectory().GetFiles();
@@ -62,8 +63,8 @@ namespace ERS_pr106_pr119.FileReader
 						ProcessXML(ref listOstvarena, ref listPrognozirana, file, tip, datumUvoza, satnicaUvoza, fileName, datumImenaFajla);
 					}
 
-					prognozaImpl.InsertRows(listPrognozirana);
-					ostvarenaImpl.InsertRows(listOstvarena);
+                    prognozaService.InsertRows(listPrognozirana);
+                    ostvarenaService.InsertRows(listOstvarena);
 
 				}
 			}
@@ -111,7 +112,7 @@ namespace ERS_pr106_pr119.FileReader
 				string load = child.Item(1).InnerText;
 				string oblast = child.Item(2).InnerText;
 
-				podrucje.InsertRowFromPotrosnja(oblast);  //Punjenje tipa entiteta novim oblastima iz XML fajla
+                podrucjeService.InsertRowFromPotrosnja(oblast);  //Punjenje tipa entiteta novim oblastima iz XML fajla
 
 
 				try
