@@ -39,7 +39,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 			}
 			return elementList;
 		}
-		public bool ExistsById(int sat_p, string oblast_p, string fileName_p, IDbConnection connection)
+		private bool ExistsById(int sat_p, string oblast_p, string fileName_p, IDbConnection connection)
 		{
 			string query = "SELECT * from prog_potrosnja where sat_p=:sat_p AND oblast_p =:oblast_p AND fileName_p =:fileName_p";
 
@@ -61,7 +61,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 			}
 
 		}
-		public int SaveRow(Element entity, IDbConnection connection)
+		private int SaveRow(Element entity, IDbConnection connection)
 		{
 
 			string insertSql = "insert into prog_potrosnja(sat_p, load_p, oblast_p, tip_p, datumUvoza_p ,satnicaUvoza_p ,file_location_p,datumImenaFajla_p,fileName_p )" +

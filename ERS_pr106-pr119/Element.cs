@@ -20,7 +20,8 @@ namespace ERS_pr106_pr119
 		    private string fileName = string.Empty;
 
             public Element(int sat, string load, string oblast,string tip, string datumUvoza, string satnicaUvoza, string file_location, string datumImenaFajla, string fileName)
-            {
+            {   
+                /*
 			    if (tip != "ostv" && tip != "prog")
                 {
                     throw new ArgumentException("Tip mora biti ili ostv ili prog", nameof(tip));
@@ -35,7 +36,7 @@ namespace ERS_pr106_pr119
                 {
                     throw new FormatException("Format datuma mora biti DD/MM/YYYY");
 			    }
-
+                */
 
 				this.sat = sat;
                 this.load = load;

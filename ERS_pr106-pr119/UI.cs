@@ -8,6 +8,7 @@ using ERS_pr106_pr119.DTO;
 using ERS_pr106_pr119.Export;
 using ERS_pr106_pr119.SUBP.RowManagement;
 using ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion;
+using ERS_pr106_pr119.SUBP.Service;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ERS_pr106_pr119
@@ -16,8 +17,8 @@ namespace ERS_pr106_pr119
 	{
 		private static readonly IPodrucje podrucje = new PodrucjeImpl();
 
-		private static readonly PrognozaEnergijeImpl prognozaImpl = new PrognozaEnergijeImpl();
-		private static readonly OstvarenaEnergijaImpl ostvarenaImpl = new OstvarenaEnergijaImpl();
+		private static readonly PrognozaEnergijeService prognozaService = new PrognozaEnergijeService();
+		private static readonly OstvarenaEnergijaService ostvarenaService = new OstvarenaEnergijaService();
 		public UI() { }
 
 		public void Show()
@@ -33,8 +34,8 @@ namespace ERS_pr106_pr119
         {
 			List<Element> prognozaTest = new List<Element>();
 			List<Element> ostvarenaTest = new List<Element>();
-			prognozaTest = prognozaImpl.FindAll().ToList();
-			ostvarenaTest = ostvarenaImpl.FindAll().ToList();
+			prognozaTest = prognozaService.FindAll().ToList();
+			ostvarenaTest = ostvarenaService.FindAll().ToList();
 
 			string datum = GetInputDate(prognozaTest);
 			if (datum == "q") { return null; }
@@ -44,8 +45,8 @@ namespace ERS_pr106_pr119
 			List<Element> Lostv = new List<Element>();
 			List<Element> Lprog = new List<Element>();
 
-			Lprog = prognozaImpl.PullProgPotrosnjaByDateAndArea(datum, geoOblast);
-			Lostv = ostvarenaImpl.PullOstvPotrosnjaByDateAndArea(datum, geoOblast);
+			Lprog = prognozaService.PullProgPotrosnjaByDateAndArea(datum, geoOblast);
+			Lostv = ostvarenaService.PullOstvPotrosnjaByDateAndArea(datum, geoOblast);
 
 			List<string> rOdstupanja = new List<string>();
 
