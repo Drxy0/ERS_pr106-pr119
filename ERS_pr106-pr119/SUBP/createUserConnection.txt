@@ -1,0 +1,22 @@
+﻿
+create user potrosnja identified by ftn
+	default tablespace USERS temporary tablespace TEMP;
+
+
+	grant connect, resource to potrosnja;
+
+	grant create table to potrosnja;
+
+	grant create view to potrosnja;
+
+	grant create procedure to potrosnja;
+
+	grant create synonym to potrosnja;
+
+	grant create sequence to potrosnja;
+
+	grant select on dba_rollback_segs to potrosnja;
+
+	grant select on dba_segments to potrosnja;
+
+	grant unlimited tablespace to potrosnja;
