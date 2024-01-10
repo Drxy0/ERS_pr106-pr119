@@ -14,10 +14,10 @@ namespace ERS_pr106_pr119.Tests
 			string oblast = "Test";
 			string tip = "ostv";
 			string datumUvoza = "01/01/2022";
-			string satnicaUvoza = "12:00";
+			string satnicaUvoza = "12:00:00";
 			string fileLocation = "C:\\Test\\file.txt";
-			string datumImenaFajla = "01012022";
-			string fileName = "file.txt";
+			string datumImenaFajla = "01.01.2023.";
+			string fileName = "prog_2023_01_01.xml";
 
 			// Act
 			Element element = new Element(sat, load, oblast, tip, datumUvoza, satnicaUvoza, fileLocation, datumImenaFajla, fileName);
@@ -44,10 +44,10 @@ namespace ERS_pr106_pr119.Tests
 			string load = "10";
 			string oblast = "Test";
 			string datumUvoza = "01/01/2022";
-			string satnicaUvoza = "12:00";
+			string satnicaUvoza = "12:00:00";
 			string fileLocation = "C:\\Test\\file.txt";
 			string datumImenaFajla = "01012022";
-			string fileName = "file.txt";
+			string fileName = "prog_2023_01_01.xml";
 
 			// Act, Assert
 			Assert.Throws<ArgumentException>(() => new Element(sat, load, oblast, tip, datumUvoza, satnicaUvoza, fileLocation, datumImenaFajla, fileName));
@@ -63,10 +63,10 @@ namespace ERS_pr106_pr119.Tests
 			string oblast = "Test";
 			string tip = "ostv";
 			string datumUvoza = "01/01/2022";
-			string satnicaUvoza = "12:00";
+			string satnicaUvoza = "12:00:00";
 			string fileLocation = "C:\\Test\\file.txt";
 			string datumImenaFajla = "01012022";
-			string fileName = "file.txt";
+			string fileName = "prog_2023_01_01.xml";
 
 			// Act, Assert
 			Assert.Throws<ArgumentException>(() => new Element(sat, load, oblast, tip, datumUvoza, satnicaUvoza, fileLocation, datumImenaFajla, fileName));
@@ -74,6 +74,8 @@ namespace ERS_pr106_pr119.Tests
 
 		[Test]
 		[TestCase("01-01-2022")]
+		[TestCase("35/01/2022")]
+		[TestCase("01/15/2022")]
 		[TestCase("2022/01/01")]
 		[TestCase("01/01")]
 		[TestCase("01-01-2022")]
@@ -84,10 +86,31 @@ namespace ERS_pr106_pr119.Tests
 			string load = "10";
 			string oblast = "Test";
 			string tip = "ostv";
-			string satnicaUvoza = "12:00";
+			string satnicaUvoza = "12:00:00";
 			string fileLocation = "C:\\Test\\file.txt";
 			string datumImenaFajla = "01012022";
-			string fileName = "file.txt";
+			string fileName = "prog_2023_01_01.xml";
+
+			// Act, Assert
+			Assert.Throws<FormatException>(() => new Element(sat, load, oblast, tip, datumUvoza, satnicaUvoza, fileLocation, datumImenaFajla, fileName));
+		}
+
+		[Test]
+		[TestCase("12:00")]
+		[TestCase("25:00:00")]
+		[TestCase("00:-10")]
+		public void Constructor_InvalidSatnicaUvoza_ThrowsFormatException(string satnicaUvozaa)
+		{
+			// Arrange
+			int sat = 1;
+			string load = "10";
+			string oblast = "Test";
+			string tip = "ostv";
+			string datumUvoza = "01/01/2022";
+			string satnicaUvoza = satnicaUvozaa;
+			string fileLocation = "C:\\Test\\file.txt";
+			string datumImenaFajla = "01012022";
+			string fileName = "prog_2023_01_01.xml";
 
 			// Act, Assert
 			Assert.Throws<FormatException>(() => new Element(sat, load, oblast, tip, datumUvoza, satnicaUvoza, fileLocation, datumImenaFajla, fileName));

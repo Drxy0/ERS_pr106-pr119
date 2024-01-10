@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace ERS_pr106_pr119.Tests
 {
 	[TestFixture]
-	public class DatumTests
+	public class DatumTest
 	{
 		[Test]
 		public void Constructor_ValidDate_ShouldNotThrowException()

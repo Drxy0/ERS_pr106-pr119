@@ -18,6 +18,7 @@ namespace ERS_pr106_pr119
 			string folderName = "xml";
 			ReaderXML xmlReader = new ReaderXML();
 			ExportDTO exportTable = new ExportDTO();
+			InMemoryDataBaseDTO? inMemDB = new InMemoryDataBaseDTO();
 			string? s;
 			do {
 				ui.Show();
@@ -26,9 +27,12 @@ namespace ERS_pr106_pr119
 				{
 					case "1":
 						xmlReader.Ucitaj(folderName);
+						//inMemDB = xmlReader.UcitajInMemory(folderName);
 						break;
 					case "2":
 						exportTable = ui.IspisOpcije();
+						//if (inMemDB != null)
+							//exportTable = ui.IspisOpcijeInMemory(inMemDB, "07.05.202s0.", "VOJ");
 						if (exportTable == null)
 							break;
 						if (ui.ExportUpit() == true)
@@ -37,6 +41,9 @@ namespace ERS_pr106_pr119
 				}
 			}
 			while (s != "q");
-        }
-    }
+
+			//Unit Test TODO
+			// Test za SUBP
+		}
+	}
 }

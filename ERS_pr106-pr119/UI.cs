@@ -32,21 +32,21 @@ namespace ERS_pr106_pr119
 
 		public ExportDTO IspisOpcije()
         {
-			List<Element> prognozaTest = new List<Element>();
-			List<Element> ostvarenaTest = new List<Element>();
-			prognozaTest = prognozaService.FindAll().ToList();
-			ostvarenaTest = ostvarenaService.FindAll().ToList();
+			List<Element> prognozaTest = prognozaService.FindAll().ToList();
+			//List<Element> ostvarenaTest = ostvarenaService.FindAll().ToList();
+
+			foreach (Element element in prognozaTest)
+			{
+				Console.WriteLine(element.DatumImenaFajla);
+			}
 
 			string datum = GetInputDate(prognozaTest);
 			if (datum == "q") { return null; }
 			string geoOblast = getInputOblast();
 			if (geoOblast == "q") { return null; }
 
-			List<Element> Lostv = new List<Element>();
-			List<Element> Lprog = new List<Element>();
-
-			Lprog = prognozaService.PullProgPotrosnjaByDateAndArea(datum, geoOblast);
-			Lostv = ostvarenaService.PullOstvPotrosnjaByDateAndArea(datum, geoOblast);
+			List<Element> Lostv = ostvarenaService.PullOstvPotrosnjaByDateAndArea(datum, geoOblast);
+			List<Element> Lprog = prognozaService.PullProgPotrosnjaByDateAndArea(datum, geoOblast);
 
 			List<string> rOdstupanja = new List<string>();
 
@@ -79,6 +79,75 @@ namespace ERS_pr106_pr119
 			
 			return exportTable;
 		}
+
+		public ExportDTO IspisOpcijeInMemory(InMemoryDataBaseDTO inMemDB, string datum, string geoOblast)
+		{
+			List<Element> prognozaTest = inMemDB.PrognoziranaPotrosnja;
+			List<Element> ostvarenaTest = inMemDB.OstvarenaPotrosnja;
+
+			if (prognozaTest.Count != ostvarenaTest.Count || (prognozaTest.Count == 0 && ostvarenaTest.Count == 0))
+			{
+				Console.WriteLine("Datoteke nemaju jednak broj polja ili su prazne!");
+				return null;
+			}
+
+			List<Element> Lprog = new List<Element>();
+			List<Element> Lostv = new List<Element>();
+
+			foreach (Element el in prognozaTest)
+			{
+				if (el.DatumImenaFajla == datum && el.Oblast == geoOblast)
+				{
+					Lprog.Add(el);
+				}
+			}
+
+			foreach (Element el in ostvarenaTest)
+			{
+				if (el.DatumImenaFajla == datum && el.Oblast == geoOblast)
+				{
+					Lostv.Add(el);
+				}
+			}
+
+			if (Lprog.Count != Lostv.Count || (Lprog.Count == 0 && Lostv.Count == 0))
+			{
+				Console.WriteLine("Neuspješno pravljenje tabele! Provjeriti parametre.");
+				return null;
+			}
+
+			List<string> rOdstupanja = new List<string>();
+
+			Console.WriteLine(GetFormattedHeader());
+			for (int i = 0; i < Lostv.Count; i++)
+			{
+				try
+				{
+					double relativnoOdstupanje = ((double.Parse(Lostv[i].Load) - double.Parse(Lprog[i].Load)) / double.Parse(Lostv[i].Load) * 100);
+					string rOdstupanjeString = relativnoOdstupanje.ToString("F2") + " %";
+
+					rOdstupanja.Add(rOdstupanjeString);
+					Console.WriteLine(string.Format("{0,-10} {1,-20} {2,-20} {3, -6} {4, -1}",
+						Lostv[i].Sat, Lostv[i].Load, Lprog[i].Load, relativnoOdstupanje.ToString("F2"), "%"));
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine("Datoteke nemaju jednak broj polja!");
+					Console.WriteLine(ex.Message);
+				}
+
+			}
+
+			ExportDTO exportTable = new ExportDTO();
+			exportTable.Oblast = geoOblast;
+			exportTable.Datum = new Datum().SetDatumFromString(datum);
+			exportTable.OstvarenaP = Lostv;
+			exportTable.PrognoziranaP = Lprog;
+			exportTable.Odstupanja = rOdstupanja;
+
+			return exportTable;
+		}
+
 		private static string GetFormattedHeader()
 		{
 			return string.Format("\n{0,-10} {1,-20} {2,-20} {3,-20}",

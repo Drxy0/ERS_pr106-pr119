@@ -66,7 +66,7 @@ namespace ERS_pr106_pr119.FileReader
                     prognozaService.InsertRows(listPrognozirana);
                     ostvarenaService.InsertRows(listOstvarena);
 				}
-				
+				Console.WriteLine("Podaci uspješno učitani i zapisani u bazu podataka");
 			}
 			else
 			{
@@ -74,6 +74,72 @@ namespace ERS_pr106_pr119.FileReader
 			}
 		}
 
+
+		public InMemoryDataBaseDTO? UcitajInMemory(string folderName)
+		{
+			string[]? files = new FilesDirectory().GetFiles(folderName);
+
+			if (files != null)
+			{
+				InMemoryDataBaseDTO inMemDB = new InMemoryDataBaseDTO(); 
+				foreach (string file in files)
+				{
+					List<Element> listOstvarena = new List<Element>();
+					List<Element> listPrognozirana = new List<Element>();
+
+					string fileName = Path.GetFileName(file);
+					string[] extension = fileName.Split('.');
+
+					string tip = string.Empty;
+					string dan = string.Empty;
+					string mjesec = string.Empty;
+					string godina = string.Empty;
+
+					try
+					{
+						string[] nameComponents = extension[0].Split('_');
+
+						tip = nameComponents[0];
+						godina = nameComponents[1];
+						mjesec = nameComponents[2];
+						dan = nameComponents[3];
+					}
+					catch (Exception ex)
+					{
+						Console.WriteLine("Ime fajla mora biti u formatu 'tip_yyyy_mm_dd'");
+						Console.WriteLine(ex.Message);
+					}
+
+					string datumUvoza = string.Empty;
+					string satnicaUvoza = string.Empty;
+					GetCurrentTime(ref datumUvoza, ref satnicaUvoza);
+					string datumImenaFajla = dan + "." + mjesec + "." + godina + ".";
+
+					string fileExtension = Path.GetExtension(file);
+					if (fileExtension == ".xml")
+					{
+						ProcessXML(ref listOstvarena, ref listPrognozirana, file, tip, datumUvoza, satnicaUvoza, fileName, datumImenaFajla);
+					}
+
+					foreach(Element el in listOstvarena)
+					{
+						inMemDB.OstvarenaPotrosnja.Add(el);
+					}
+
+					foreach (Element el in listPrognozirana)
+					{
+						inMemDB.PrognoziranaPotrosnja.Add(el);
+					}
+				}
+				Console.WriteLine("Podaci uspješno učitani i zapisani u inMemory bazu podataka");
+				return inMemDB;
+			}
+			else
+			{
+				Console.WriteLine("Error trying to find files. Expected path ./{1}", folderName);
+				return null;
+			}
+		}
 		private void ProcessXML(ref List<Element> listOstvarena,
 								ref List<Element> listPrognozirana,
 								string file,
