@@ -1,5 +1,6 @@
 ﻿using ERS_pr106_pr119;
 using ERS_pr106_pr119.DTO;
+using ERS_pr106_pr119.Model;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -9,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace ERS_pr106_pr119Test
 {
-	[TestFixture]
-	public class UITest
+    [TestFixture]
+	public class IspisPodatakaTest
 	{
-		UI uiInstance = null;
+		IspisPodataka uiInstance = null;
 		InMemoryDataBaseDTO inMemDB = null;
 
 		[SetUp]
 		public void Setup()
 		{
-			uiInstance = new UI();
+			uiInstance = new IspisPodataka();
 
 			var inMemDBMock = new Mock<InMemoryDataBaseDTO>();
 
@@ -50,7 +51,6 @@ namespace ERS_pr106_pr119Test
 
 			// Assert
 			Assert.NotNull(result);
-			// Add more assertions based on the expected behavior of your method
 		}
 
 		[Test]
@@ -64,7 +64,6 @@ namespace ERS_pr106_pr119Test
 
 			// Assert
 			Assert.Null(result);
-			// Add more assertions based on the expected behavior of your method
 		}
 
 		[Test]
@@ -79,7 +78,6 @@ namespace ERS_pr106_pr119Test
 
 			// Assert
 			Assert.Null(result);
-			// Add more assertions based on the expected behavior of your method
 		}
 
 
@@ -91,7 +89,6 @@ namespace ERS_pr106_pr119Test
 
 			// Assert
 			Assert.Null(result);
-			// Add more assertions based on the expected behavior of your method
 		}
 	}
 }

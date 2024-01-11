@@ -1,8 +1,8 @@
 ﻿using ERS_pr106_pr119.DTO;
-using ERS_pr106_pr119.Export;
-using ERS_pr106_pr119.FileReader;
+using ERS_pr106_pr119.Export.Impl;
+using ERS_pr106_pr119.FileReader.FileReaderImplementations;
 using ERS_pr106_pr119.SUBP;
-using ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion;
+using ERS_pr106_pr119.SUBP.DAO.RowManagement.InquiryExectuion;
 using System.IO;
 using System.Xml;
 
@@ -14,14 +14,15 @@ namespace ERS_pr106_pr119
 		{
 			TableSetupCommands.TableCreations();
 
-			UI ui = new UI();
+			IspisPodataka ispisPodataka = new IspisPodataka();
+			GUI gui = new GUI();
 			string folderName = "xml";
 			ReaderXML xmlReader = new ReaderXML();
 			ExportDTO exportTable = new ExportDTO();
 			InMemoryDataBaseDTO? inMemDB = new InMemoryDataBaseDTO();
 			string? s;
 			do {
-				ui.Show();
+				gui.Show();
 				s = Console.ReadLine();
 				switch (s)
 				{
@@ -30,20 +31,17 @@ namespace ERS_pr106_pr119
 						//inMemDB = xmlReader.UcitajInMemory(folderName);
 						break;
 					case "2":
-						exportTable = ui.IspisOpcije();
+						exportTable = ispisPodataka.IspisOpcije();
 						//if (inMemDB != null)
-							//exportTable = ui.IspisOpcijeInMemory(inMemDB, "07.05.202s0.", "VOJ");
+							//exportTable = ui.IspisOpcijeInMemory(inMemDB, "07.05.2020.", "VOJ");
 						if (exportTable == null)
 							break;
-						if (ui.ExportUpit() == true)
+						if (ispisPodataka.ExportUpit() == true)
 							new ExportToCSV().Export(exportTable);
 						break;
 				}
 			}
 			while (s != "q");
-
-			//Unit Test TODO
-			// Test za SUBP
 		}
 	}
 }

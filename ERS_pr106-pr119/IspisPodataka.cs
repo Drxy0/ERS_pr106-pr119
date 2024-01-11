@@ -6,39 +6,26 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using ERS_pr106_pr119.DTO;
 using ERS_pr106_pr119.Export;
-using ERS_pr106_pr119.SUBP.RowManagement;
-using ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion;
+using ERS_pr106_pr119.Model;
+using ERS_pr106_pr119.SUBP.DAO.RowManagement;
+using ERS_pr106_pr119.SUBP.DAO.RowManagement.InquiryExectuion;
 using ERS_pr106_pr119.SUBP.Service;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ERS_pr106_pr119
 {
-    public class UI
+    public class IspisPodataka
 	{
 		private static readonly IPodrucje podrucje = new PodrucjeImpl();
 
 		private static readonly PrognozaEnergijeService prognozaService = new PrognozaEnergijeService();
 		private static readonly OstvarenaEnergijaService ostvarenaService = new OstvarenaEnergijaService();
-		public UI() { }
-
-		public void Show()
-		{
-			string UIstring = "\nEvidencija potrošnje električne energije\n\n" +
-								"1 - Importuj fajlove\n" +
-								"2 - Ispisati prognoziranu i ostvarenu potrošnju\n" +
-								"q - Quit program\n";
-			Console.WriteLine(UIstring);
-		}
+		public IspisPodataka() { }
 
 		public ExportDTO IspisOpcije()
         {
 			List<Element> prognozaTest = prognozaService.FindAll().ToList();
 			//List<Element> ostvarenaTest = ostvarenaService.FindAll().ToList();
-
-			foreach (Element element in prognozaTest)
-			{
-				Console.WriteLine(element.DatumImenaFajla);
-			}
 
 			string datum = GetInputDate(prognozaTest);
 			if (datum == "q") { return null; }

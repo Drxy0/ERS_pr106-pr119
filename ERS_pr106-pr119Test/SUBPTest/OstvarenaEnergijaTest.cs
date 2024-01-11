@@ -2,8 +2,8 @@
 using Moq;
 using System;
 using ERS_pr106_pr119.SUBP.Service;
-using ERS_pr106_pr119;
-using ERS_pr106_pr119.SUBP.RowManagement;
+using ERS_pr106_pr119.Model;
+using ERS_pr106_pr119.SUBP.DAO.RowManagement;
 
 [TestFixture]
 public class OstvarenaEnergijaTest
