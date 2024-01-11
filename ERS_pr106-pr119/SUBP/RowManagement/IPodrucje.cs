@@ -8,6 +8,6 @@ namespace ERS_pr106_pr119.SUBP.RowManagement
 {
     public interface IPodrucje : ITableManagement<Geografskopodrucje>
     {
-        public void InsertRowFromPotrosnja(string oblast);
+        public int InsertRowFromPotrosnja(string oblast);
     }
 }

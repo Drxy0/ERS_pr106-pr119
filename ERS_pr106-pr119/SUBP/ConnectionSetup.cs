@@ -14,8 +14,20 @@ namespace ERS_pr106_pr119.SUBP
     {
         private static IDbConnection connection = null;
 
+        private static IDbConnection MockConnection { get; set; }
+
+        public static void OverrideConnection(IDbConnection mockConnection)
+        {
+            MockConnection = mockConnection;
+        }
+
         public static IDbConnection GetConnection()
         {
+            if (MockConnection != null)
+            {
+                return MockConnection;
+            }
+
             if (connection == null || connection.State == System.Data.ConnectionState.Closed)
             {
                 OracleConnectionStringBuilder ocsb = new OracleConnectionStringBuilder();

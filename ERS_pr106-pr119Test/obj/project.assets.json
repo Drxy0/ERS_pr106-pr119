@@ -1603,19 +1603,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\drljo\\.nuget\\packages\\": {}
+    "C:\\Users\\skail\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\drljo\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119Test\\ERS_pr106-pr119Test.csproj",
+      "projectUniqueName": "C:\\Users\\skail\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119Test\\ERS_pr106-pr119Test.csproj",
       "projectName": "ERS_pr106-pr119Test",
-      "projectPath": "C:\\Users\\drljo\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119Test\\ERS_pr106-pr119Test.csproj",
-      "packagesPath": "C:\\Users\\drljo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\drljo\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119Test\\obj\\",
+      "projectPath": "C:\\Users\\skail\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119Test\\ERS_pr106-pr119Test.csproj",
+      "packagesPath": "C:\\Users\\skail\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\skail\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119Test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\drljo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\skail\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1629,8 +1629,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\drljo\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj": {
-              "projectPath": "C:\\Users\\drljo\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj"
+            "C:\\Users\\skail\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj": {
+              "projectPath": "C:\\Users\\skail\\Desktop\\Projekat\\ERS_pr106-pr119\\ERS_pr106-pr119\\ERS_pr106-pr119.csproj"
             }
           }
         }
