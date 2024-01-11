@@ -26,8 +26,6 @@ namespace ERS_pr106_pr119.SUBP.Service
             ostvMangament.InsertRows(listaCeleTabele);
 
             if (listaCeleTabele.Count == 0) {
-
-                
             
             }
 

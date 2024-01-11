@@ -9,14 +9,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="InMemoryBP\**" />
+    <EmbeddedResource Remove="InMemoryBP\**" />
+    <None Remove="InMemoryBP\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Moq" Version="4.20.70" />
     <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="3.21.120" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
     <PackageReference Include="System.Security.Permissions" Version="8.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="InMemoryBP\Service\" />
   </ItemGroup>
 
 </Project>
