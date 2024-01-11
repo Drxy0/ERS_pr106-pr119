@@ -37,7 +37,7 @@ namespace ERS_pr106_pr119.SUBP.Service
 
             if (!(Regex.IsMatch(oblast, "^[A-Z]+$")))                               //AAA
             {
-                Console.WriteLine("Nema informacija za tu oblast!");
+                throw new FormatException();
             }
 
             if (!(podrucje.FindAll().Any(gp => gp.Oblast == oblast)))
@@ -47,7 +47,7 @@ namespace ERS_pr106_pr119.SUBP.Service
 
             if (!(Regex.IsMatch(datum, @"^\d{2}\.\d{2}\.\d{4}\.$")))
             {              //dd.mm.yyyy.
-                throw new InvalidOperationException("Nevalidan unos datuma");
+                throw new FormatException();
             }
 
             if (!string.IsNullOrEmpty(datum))
@@ -60,7 +60,7 @@ namespace ERS_pr106_pr119.SUBP.Service
                 Console.WriteLine("Nema informacija za taj datum!");
             }
 
-            throw new InvalidOperationException("Nevalidan unos datuma");
+            throw new FormatException();
 
         }
     }

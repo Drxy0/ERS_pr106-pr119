@@ -73,7 +73,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
             }
         }
 
-        public void InsertRowFromPotrosnja(string oblast)
+        public int InsertRowFromPotrosnja(string oblast)
         {
             string insertSql = "insert into podrucje(oblast, nazivP) values (:oblast,:nazivP)";
 
@@ -99,6 +99,8 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
                             ParameterManagement.SetParameterValue(command, "nazivP", oblast);
 
                             command.ExecuteNonQuery();
+
+                            return 1;
                         }
                     }
                     transaction.Commit();
@@ -109,6 +111,8 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
                     Console.WriteLine($"Error: {ex.Message}");
                 }
             }
+
+            return 0;
         }
 
         public IEnumerable<Geografskopodrucje> FindAll()
