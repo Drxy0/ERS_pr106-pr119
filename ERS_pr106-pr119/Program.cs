@@ -33,7 +33,7 @@ namespace ERS_pr106_pr119
 					case "2":
 						exportTable = ispisPodataka.IspisOpcije();
 						//if (inMemDB != null)
-							//exportTable = ui.IspisOpcijeInMemory(inMemDB, "07.05.202s0.", "VOJ");
+							//exportTable = ui.IspisOpcijeInMemory(inMemDB, "07.05.2020.", "VOJ");
 						if (exportTable == null)
 							break;
 						if (ispisPodataka.ExportUpit() == true)
@@ -42,9 +42,6 @@ namespace ERS_pr106_pr119
 				}
 			}
 			while (s != "q");
-
-			//Unit Test TODO
-			// Test za SUBP
 		}
 	}
 }
