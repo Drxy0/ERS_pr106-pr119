@@ -1,8 +1,9 @@
-﻿using NUnit.Framework;
+﻿using ERS_pr106_pr119.Model;
+using NUnit.Framework;
 
 namespace ERS_pr106_pr119.Tests
 {
-	[TestFixture]
+    [TestFixture]
 	public class ElementTests
 	{
 		[Test]

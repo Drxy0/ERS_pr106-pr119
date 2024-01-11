@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERS_pr106_pr119.SUBP
+namespace ERS_pr106_pr119.SUBP.DAO
 {
     public interface ITableManagement<T>
     {

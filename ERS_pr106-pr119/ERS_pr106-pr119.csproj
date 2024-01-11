@@ -15,4 +15,8 @@
     <PackageReference Include="System.Security.Permissions" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="InMemoryBP\Service\" />
+  </ItemGroup>
+
 </Project>

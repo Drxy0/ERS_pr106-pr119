@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERS_pr106_pr119.SUBP
+namespace ERS_pr106_pr119.SUBP.Connection
 {
     public interface IConnection : IDisposable
     {
@@ -15,7 +15,6 @@ namespace ERS_pr106_pr119.SUBP
         IDbConnection GetConnection();
 
         void Dispose();
-
 
     }
 }

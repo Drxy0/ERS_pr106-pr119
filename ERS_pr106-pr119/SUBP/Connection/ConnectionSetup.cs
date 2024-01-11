@@ -4,13 +4,11 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-
 using Oracle.ManagedDataAccess.Client;
 
-namespace ERS_pr106_pr119.SUBP
+namespace ERS_pr106_pr119.SUBP.Connection
 {
-    public class ConnectionSetup: IDisposable
+    public class ConnectionSetup : IDisposable
     {
         private static IDbConnection connection = null;
 
@@ -28,10 +26,10 @@ namespace ERS_pr106_pr119.SUBP
                 return MockConnection;
             }
 
-            if (connection == null || connection.State == System.Data.ConnectionState.Closed)
+            if (connection == null || connection.State == ConnectionState.Closed)
             {
                 OracleConnectionStringBuilder ocsb = new OracleConnectionStringBuilder();
-               
+
                 ocsb.DataSource = ConnectionParam.LOCAL_DATA_SOURCE;
                 ocsb.UserID = ConnectionParam.USER_ID;
                 ocsb.Password = ConnectionParam.PASSWORD;
@@ -43,8 +41,8 @@ namespace ERS_pr106_pr119.SUBP
                 ocsb.ConnectionTimeout = 30;
 
                 connection = new OracleConnection(ocsb.ConnectionString);
-                
-                
+
+
             }
             return connection;
         }
