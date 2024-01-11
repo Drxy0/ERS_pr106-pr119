@@ -33,7 +33,7 @@ namespace ERS_pr106_pr119
 					case "2":
 						exportTable = ispisPodataka.IspisOpcije();
 						//if (inMemDB != null)
-							//exportTable = ui.IspisOpcijeInMemory(inMemDB, "07.05.2020.", "VOJ");
+						//	exportTable = ispisPodataka.IspisOpcijeInMemory(inMemDB, "07.05.2020.", "VOJ");
 						if (exportTable == null)
 							break;
 						if (ispisPodataka.ExportUpit() == true)

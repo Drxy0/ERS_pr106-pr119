@@ -13,13 +13,13 @@ namespace ERS_pr106_pr119Test
     [TestFixture]
 	public class IspisPodatakaTest
 	{
-		IspisPodataka uiInstance = null;
+		IspisPodataka Instance = null;
 		InMemoryDataBaseDTO inMemDB = null;
 
 		[SetUp]
 		public void Setup()
 		{
-			uiInstance = new IspisPodataka();
+			Instance = new IspisPodataka();
 
 			var inMemDBMock = new Mock<InMemoryDataBaseDTO>();
 
@@ -47,7 +47,7 @@ namespace ERS_pr106_pr119Test
 		public void IspisOpcijeInMemory_ValidInput_ReturnsExportDTO(string datum, string geoOblast)
 		{
 			// Act
-			var result = uiInstance.IspisOpcijeInMemory(inMemDB, datum, geoOblast);
+			var result = Instance.IspisOpcijeInMemory(inMemDB, datum, geoOblast);
 
 			// Assert
 			Assert.NotNull(result);
@@ -60,7 +60,7 @@ namespace ERS_pr106_pr119Test
 			InMemoryDataBaseDTO inMemDB = new InMemoryDataBaseDTO();
 
 			// Act
-			var result = uiInstance.IspisOpcijeInMemory(inMemDB, "01.01.2023.", "VOJ");
+			var result = Instance.IspisOpcijeInMemory(inMemDB, "01.01.2023.", "VOJ");
 
 			// Assert
 			Assert.Null(result);
@@ -74,7 +74,7 @@ namespace ERS_pr106_pr119Test
 		public void IspisOpcijeInMemory_InvalidDatum_ReturnsNull(string datum)
 		{
 			// Act
-			var result = uiInstance.IspisOpcijeInMemory(inMemDB, datum, "VOJ");
+			var result = Instance.IspisOpcijeInMemory(inMemDB, datum, "VOJ");
 
 			// Assert
 			Assert.Null(result);
@@ -85,7 +85,7 @@ namespace ERS_pr106_pr119Test
 		public void IspisOpcijeInMemory_InvalidGeoOblast_ReturnsNull()
 		{
 			// Act
-			var result = uiInstance.IspisOpcijeInMemory(inMemDB, "01.01.2023.", "qwerty");
+			var result = Instance.IspisOpcijeInMemory(inMemDB, "01.01.2023.", "qwerty");
 
 			// Assert
 			Assert.Null(result);

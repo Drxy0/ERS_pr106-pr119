@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using ERS_pr106_pr119.DTO;
 using ERS_pr106_pr119.Export;
+using ERS_pr106_pr119.InMemoryDB.Service;
 using ERS_pr106_pr119.Model;
 using ERS_pr106_pr119.SUBP.DAO.RowManagement;
 using ERS_pr106_pr119.SUBP.DAO.RowManagement.InquiryExectuion;
@@ -69,35 +70,14 @@ namespace ERS_pr106_pr119
 
 		public ExportDTO IspisOpcijeInMemory(InMemoryDataBaseDTO inMemDB, string datum, string geoOblast)
 		{
-			List<Element> prognozaTest = inMemDB.PrognoziranaPotrosnja;
-			List<Element> ostvarenaTest = inMemDB.OstvarenaPotrosnja;
-
-			if (prognozaTest.Count != ostvarenaTest.Count || (prognozaTest.Count == 0 && ostvarenaTest.Count == 0))
-			{
-				Console.WriteLine("Datoteke nemaju jednak broj polja ili su prazne!");
+			InMemoryDB_Service inMemDB_Service = new InMemoryDB_Service(inMemDB);
+			if (inMemDB_Service.DataBaseCount() == false)
 				return null;
-			}
 
-			List<Element> Lprog = new List<Element>();
-			List<Element> Lostv = new List<Element>();
+			List<Element> Lprog = inMemDB_Service.PullProgPotrosnjaByDateAndArea(datum, geoOblast);
+			List<Element> Lostv = inMemDB_Service.PullOstvPotrosnjaByDateAndArea(datum, geoOblast);
 
-			foreach (Element el in prognozaTest)
-			{
-				if (el.DatumImenaFajla == datum && el.Oblast == geoOblast)
-				{
-					Lprog.Add(el);
-				}
-			}
-
-			foreach (Element el in ostvarenaTest)
-			{
-				if (el.DatumImenaFajla == datum && el.Oblast == geoOblast)
-				{
-					Lostv.Add(el);
-				}
-			}
-
-			if (Lprog.Count != Lostv.Count || (Lprog.Count == 0 && Lostv.Count == 0))
+			if (Lprog == null || Lostv == null)
 			{
 				Console.WriteLine("Neuspješno pravljenje tabele! Provjeriti parametre.");
 				return null;
