@@ -5,13 +5,13 @@ using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ERS_pr106_pr119.SUBP.Connection;
 using Oracle.ManagedDataAccess.Client;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ERS_pr106_pr119.SUBP
 {
-	public class TablesSetup
+    public class TablesSetup
 	{
 		public static int ExecuteNonQuery(string sql)
 		{

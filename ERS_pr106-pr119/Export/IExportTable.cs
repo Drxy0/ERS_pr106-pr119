@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERS_pr106_pr119.Export
 {
-	internal interface ExportTable
+	internal interface IExportTable
 	{
 		void Export(ExportDTO exportDTO);
 	}

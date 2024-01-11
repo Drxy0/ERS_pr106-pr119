@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERS_pr106_pr119
+namespace ERS_pr106_pr119.Model
 {
     public class Geografskopodrucje
     {
@@ -14,7 +14,7 @@ namespace ERS_pr106_pr119
         public Geografskopodrucje(string oblast, string naziv)
         {
             this.oblast = oblast;
-            this.nazivP = naziv;
+            nazivP = naziv;
         }
 
         public string Oblast

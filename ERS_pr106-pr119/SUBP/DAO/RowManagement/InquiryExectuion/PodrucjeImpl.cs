@@ -4,8 +4,11 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ERS_pr106_pr119.Model;
+using ERS_pr106_pr119.SUBP.Connection;
+using ERS_pr106_pr119.SUBP.DAO.RowManagement;
 
-namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
+namespace ERS_pr106_pr119.SUBP.DAO.RowManagement.InquiryExectuion
 {
     public class PodrucjeImpl : IPodrucje
     {
@@ -37,17 +40,18 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
 
                 ParameterManagement.AddParameter(command, "oblast", DbType.String);
                 ParameterManagement.AddParameter(command, "nazivP", DbType.String);
-               
+
 
                 ParameterManagement.SetParameterValue(command, "oblast", entity.Oblast);
                 ParameterManagement.SetParameterValue(command, "nazivP", entity.NazivP);
- 
+
 
                 return command.ExecuteNonQuery();
             }
 
         }
-        public void InsertRows(List<Geografskopodrucje> listaCeleTabele) {
+        public void InsertRows(List<Geografskopodrucje> listaCeleTabele)
+        {
 
             int numSaved = 0;
 
@@ -73,9 +77,11 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
             }
         }
 
-        public void InsertRowFromPotrosnja(string oblast)
+        public int InsertRowFromPotrosnja(string oblast)
         {
             string insertSql = "insert into podrucje(oblast, nazivP) values (:oblast,:nazivP)";
+            
+            int numSaved = 0;
 
             using (IDbConnection connection = ConnectionSetup.GetConnection())
             {
@@ -98,7 +104,8 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
                             ParameterManagement.SetParameterValue(command, "oblast", oblast);
                             ParameterManagement.SetParameterValue(command, "nazivP", oblast);
 
-                            command.ExecuteNonQuery();
+							numSaved += command.ExecuteNonQuery();
+
                         }
                     }
                     transaction.Commit();
@@ -108,10 +115,11 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
                     transaction.Rollback();
                     Console.WriteLine($"Error: {ex.Message}");
                 }
+                return numSaved;
             }
-        }
+		}
 
-        public IEnumerable<Geografskopodrucje> FindAll()
+		public IEnumerable<Geografskopodrucje> FindAll()
         {
             string query = "select * from podrucje";
             List<Geografskopodrucje> ret = new List<Geografskopodrucje>();
@@ -128,13 +136,13 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
                     {
                         while (reader.Read())
                         {
-                            Geografskopodrucje gp = new Geografskopodrucje(reader.GetString(0),reader.GetString(1));
+                            Geografskopodrucje gp = new Geografskopodrucje(reader.GetString(0), reader.GetString(1));
                             ret.Add(gp);
                         }
                     }
                 }
             }
-            
+
             return ret;
         }
 

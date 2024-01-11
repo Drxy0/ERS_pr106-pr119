@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
+namespace ERS_pr106_pr119.SUBP.DAO.RowManagement.InquiryExectuion
 {
     public class ParameterManagement
     {
@@ -19,7 +19,7 @@ namespace ERS_pr106_pr119.SUBP.RowManagement.InquiryExectuion
             command.Parameters.Add(parameter);
         }
 
-        public static void SetParameterValue(IDbCommand command, string name, Object value)
+        public static void SetParameterValue(IDbCommand command, string name, object value)
         {
             DbParameter parameter = (DbParameter)command.Parameters[name];
             parameter.Value = value;
